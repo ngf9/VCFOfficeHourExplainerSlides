@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terminal 101 — VCF Office Hour</title>
+  <title>Terminal 101</title>
 
   <!-- Tailwind v3 Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -59,51 +59,82 @@
         </div>
         <div class="slide-footer text-text-secondary">
           <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
-          <span class="text-xs">|</span>
-          <span class="font-sans text-xs">VCF Office Hour</span>
         </div>
       </section>
 
-      <!-- ==================== SLIDE 2: Grounding Framework ==================== -->
+      <!-- ==================== SLIDE 2: What is the Terminal? ==================== -->
       <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="2">
-        <div class="max-w-4xl mx-auto w-full">
+        <div class="max-w-5xl mx-auto w-full">
           <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center">
-            The Basics: Three Terms to Know
+            The Terminal Is the Engine Behind Every Tool
           </h2>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div class="animate-in glass-card rounded-xl p-5 text-center">
-              <h3 class="font-serif text-lg font-semibold mb-2">Terminal</h3>
-              <p class="font-sans text-sm text-text-secondary">
-                The app where you type commands. A text-based window into your computer's operating system.
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            <!-- Left: Definition + why it matters -->
+            <div>
+              <p class="animate-in font-sans text-base sm:text-lg leading-relaxed mb-5">
+                A <span class="text-accent font-semibold">text-based interface</span> to your computer's operating system. You type commands, the terminal returns output.
               </p>
+              <p class="animate-in font-sans text-sm sm:text-base text-text-secondary leading-relaxed mb-5">
+                Every tool you use &mdash; VS Code, Claude Code, npm, git &mdash; runs through the terminal under the hood. Learning a handful of commands gives you direct control.
+              </p>
+              <div class="animate-in callout mb-5">
+                <p class="font-sans text-sm sm:text-base font-medium">
+                  You only need about 10 commands to be productive.
+                </p>
+              </div>
+              <!-- Compact layer reference -->
+              <div class="animate-in flex items-start gap-3 text-xs">
+                <div class="text-center">
+                  <span class="bg-accent/10 text-accent rounded-full px-3 py-1 font-mono font-semibold inline-block mb-1">Terminal</span>
+                  <p class="font-sans text-text-secondary">the window</p>
+                </div>
+                <span class="text-text-secondary mt-1.5">&rarr;</span>
+                <div class="text-center">
+                  <span class="bg-accent/10 text-accent rounded-full px-3 py-1 font-mono font-semibold inline-block mb-1">Shell</span>
+                  <p class="font-sans text-text-secondary">the interpreter</p>
+                </div>
+                <span class="text-text-secondary mt-1.5">&rarr;</span>
+                <div class="text-center">
+                  <span class="bg-accent/10 text-accent rounded-full px-3 py-1 font-mono font-semibold inline-block mb-1">CLI</span>
+                  <p class="font-sans text-text-secondary"><span class="font-medium text-foreground">Command Line Interface</span> &mdash; typing text instead of clicking</p>
+                </div>
+              </div>
             </div>
-            <div class="animate-in glass-card rounded-xl p-5 text-center">
-              <h3 class="font-serif text-lg font-semibold mb-2">Command Language</h3>
-              <p class="font-sans text-sm text-text-secondary">
-                The syntax the terminal understands — Bash and Zsh are examples. The grammar you use to talk to your machine.
-              </p>
-            </div>
-            <div class="animate-in glass-card rounded-xl p-5 text-center">
-              <h3 class="font-serif text-lg font-semibold mb-2">CLI</h3>
-              <p class="font-sans text-sm text-text-secondary">
-                Command Line Interface — the text-based alternative to clicking buttons in a graphical interface (GUI).
-              </p>
+
+            <!-- Right: CSS terminal window illustration -->
+            <div class="animate-in terminal-window">
+              <div class="terminal-titlebar">
+                <span class="terminal-dot terminal-dot-red"></span>
+                <span class="terminal-dot terminal-dot-yellow"></span>
+                <span class="terminal-dot terminal-dot-green"></span>
+                <span class="terminal-titlebar-text">Terminal</span>
+              </div>
+              <div class="terminal-body">
+                <div><span class="prompt">$</span> ls</div>
+                <div class="output">src/&nbsp; package.json&nbsp; README.md</div>
+                <div>&nbsp;</div>
+                <div><span class="prompt">$</span> cd src</div>
+                <div>&nbsp;</div>
+                <div><span class="prompt">$</span> pwd</div>
+                <div class="output">/Users/you/Documents/my-project/src</div>
+                <div>&nbsp;</div>
+                <div><span class="prompt">$</span> <span style="border-right: 2px solid var(--accent); padding-right: 2px;">&nbsp;</span></div>
+              </div>
             </div>
           </div>
         </div>
         <div class="slide-footer text-text-secondary">
           <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
-          <span class="text-xs">|</span>
-          <span class="font-sans text-xs">VCF Office Hour</span>
         </div>
       </section>
 
       <!-- ==================== SLIDE 3: What is a Shell? ==================== -->
       <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="3">
         <div class="max-w-4xl mx-auto w-full">
-          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center">
-            What is Bash? Zsh? Oh My Zsh?
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-center">
+            Your Shell Is Just a Program That Reads Commands
           </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary text-center mb-8">These are all <span class="text-accent font-medium">shells</span> &mdash; the interpreter that runs inside the terminal.</p>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="animate-in glass-card rounded-xl p-5 text-center">
               <h3 class="font-serif text-lg font-semibold mb-2">Bash</h3>
@@ -127,49 +158,80 @@
         </div>
         <div class="slide-footer text-text-secondary">
           <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
-          <span class="text-xs">|</span>
-          <span class="font-sans text-xs">VCF Office Hour</span>
         </div>
       </section>
 
-      <!-- ==================== SLIDE 4: Why the Terminal Matters ==================== -->
+      <!-- ==================== SLIDE 4: Navigation Commands ==================== -->
       <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="4">
+        <div class="max-w-5xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
+            Always Know Where You Are
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- File tree visualization -->
+            <div class="animate-in bg-surface rounded-xl shadow-sm p-5">
+              <p class="font-sans text-xs font-semibold text-text-secondary uppercase tracking-wide mb-3">Your file system</p>
+              <div class="file-tree">
+                <div>~/</div>
+                <div>&nbsp;&nbsp;&#9500;&#9472;&#9472; Documents/</div>
+                <div class="current">&nbsp;&nbsp;&#9474;&nbsp;&nbsp;&nbsp;&#9492;&#9472;&#9472; my-project/ &larr; you are here</div>
+                <div>&nbsp;&nbsp;&#9474;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; src/</div>
+                <div>&nbsp;&nbsp;&#9474;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; package.json</div>
+                <div>&nbsp;&nbsp;&#9474;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9492;&#9472;&#9472; README.md</div>
+                <div>&nbsp;&nbsp;&#9492;&#9472;&#9472; Desktop/</div>
+              </div>
+            </div>
+
+            <!-- Animated terminal demo -->
+            <div class="animate-in code-block terminal-demo text-sm sm:text-base">
+              <div class="typed-group">
+                <div><span class="typed-cmd" style="--chars: 6; --delay: 0.8s;"><span class="prompt">$</span> pwd</span></div>
+                <div class="typed-output comment" style="--delay: 1.4s;">/Users/you/Documents/my-project</div>
+              </div>
+              <div class="typed-group">
+                <div><span class="typed-cmd" style="--chars: 10; --delay: 3s;"><span class="prompt">$</span> cd src</span></div>
+                <div class="typed-output comment" style="--delay: 3.8s;"><span class="comment"># moved into src/ &mdash; use cd .. to go back</span></div>
+              </div>
+              <div class="typed-group">
+                <div><span class="typed-cmd" style="--chars: 5; --delay: 5.5s;"><span class="prompt">$</span> ls</span></div>
+                <div class="typed-output string" style="--delay: 6s;">src/&nbsp; package.json&nbsp; README.md</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 5: File Actions ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="5">
         <div class="max-w-4xl mx-auto w-full">
           <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
-            Why the Terminal Matters
+            You Can Create and Delete Files Without Leaving the Terminal
           </h2>
-          <p class="animate-in font-sans text-base sm:text-lg leading-relaxed mb-6 drop-cap">
-            Every tool you use — VS Code, Claude Code, npm, git — runs through the terminal under the hood. Learning a handful of commands gives you direct control over your development environment.
-          </p>
-          <div class="animate-in callout">
-            <p class="font-sans text-sm sm:text-base font-medium">
-              You only need about 10 commands to be productive.
+          <div class="animate-in code-block terminal-demo text-sm sm:text-base mb-6">
+            <div class="typed-group">
+              <div><span class="typed-cmd" style="--chars: 16; --delay: 0.6s;"><span class="prompt">$</span> mkdir my-app</span></div>
+              <div class="typed-output comment" style="--delay: 1.5s;"># creates a new folder called my-app</div>
+            </div>
+            <div class="typed-group">
+              <div><span class="typed-cmd" style="--chars: 18; --delay: 3s;"><span class="prompt">$</span> touch index.js</span></div>
+              <div class="typed-output comment" style="--delay: 4s;"># creates an empty file called index.js</div>
+            </div>
+            <div class="typed-group">
+              <div><span class="typed-cmd" style="--chars: 15; --delay: 5.5s;"><span class="prompt">$</span> rm index.js</span></div>
+              <div class="typed-output comment" style="--delay: 6.5s;"># deletes the file (no undo!)</div>
+            </div>
+          </div>
+          <div class="animate-in callout callout-warning">
+            <p class="font-sans text-sm sm:text-base">
+              <span class="font-semibold"><code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">rm</code> is permanent.</span> There's no trash can in the terminal. Use <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">rm -r folder-name</code> to delete a folder and its contents.
             </p>
           </div>
         </div>
         <div class="slide-footer text-text-secondary">
           <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
-          <span class="text-xs">|</span>
-          <span class="font-sans text-xs">VCF Office Hour</span>
-        </div>
-      </section>
-
-      <!-- ==================== SLIDE 5: Navigation Commands ==================== -->
-      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="5">
-        <div class="max-w-4xl mx-auto w-full">
-          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
-            Navigation: 3 Key Commands
-          </h2>
-          <div class="animate-in code-block text-sm sm:text-base">
-            <div class="mb-2"><span class="prompt">$</span> pwd          <span class="comment"># Where am I? Shows your current folder</span></div>
-            <div class="mb-2"><span class="prompt">$</span> cd my-app    <span class="comment"># Go somewhere. Use cd .. to go back up</span></div>
-            <div><span class="prompt">$</span> ls           <span class="comment"># What's in this folder? Lists files</span></div>
-          </div>
-        </div>
-        <div class="slide-footer text-text-secondary">
-          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
-          <span class="text-xs">|</span>
-          <span class="font-sans text-xs">VCF Office Hour</span>
         </div>
       </section>
 
@@ -177,10 +239,13 @@
       <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="6">
         <div class="max-w-4xl mx-auto w-full">
           <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
-            Open Your Editor from Terminal
+            One Command Opens Your Entire Project
           </h2>
-          <div class="animate-in code-block text-sm sm:text-base mb-6">
-            <div><span class="prompt">$</span> code .</div>
+          <div class="animate-in code-block terminal-demo text-sm sm:text-base mb-6">
+            <div class="typed-group">
+              <div><span class="typed-cmd" style="--chars: 9; --delay: 0.6s;"><span class="prompt">$</span> code .</span></div>
+              <div class="typed-output comment" style="--delay: 1.5s;"># VS Code opens with your project loaded</div>
+            </div>
           </div>
           <p class="animate-in font-sans text-base sm:text-lg text-text-secondary mb-6">
             Opens the current folder in VS Code. The fastest way to get your editor open with the right project loaded.
@@ -194,8 +259,6 @@
         </div>
         <div class="slide-footer text-text-secondary">
           <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
-          <span class="text-xs">|</span>
-          <span class="font-sans text-xs">VCF Office Hour</span>
         </div>
       </section>
 
@@ -203,58 +266,99 @@
       <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="7">
         <div class="max-w-4xl mx-auto w-full">
           <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
-            npm: Two Commands You Need
+            Install Once, Run Every Day
           </h2>
-          <div class="animate-in code-block text-sm sm:text-base mb-6">
-            <div class="mb-2"><span class="prompt">$</span> npm install   <span class="comment"># Install all dependencies</span></div>
-            <div><span class="prompt">$</span> npm run dev   <span class="comment"># Start the dev server &rarr; localhost:3000</span></div>
+          <div class="animate-in code-block terminal-demo text-sm sm:text-base mb-6">
+            <div class="typed-group">
+              <div><span class="typed-cmd" style="--chars: 15; --delay: 0.6s;"><span class="prompt">$</span> npm install</span></div>
+              <div class="typed-output comment" style="--delay: 1.8s;">added 1,247 packages in 12s</div>
+            </div>
+            <div class="typed-group">
+              <div><span class="typed-cmd" style="--chars: 15; --delay: 3.5s;"><span class="prompt">$</span> npm run dev</span></div>
+              <div class="typed-output string" style="--delay: 4.7s;">ready &mdash; started server on localhost:3000</div>
+            </div>
           </div>
           <div class="animate-in callout callout-warning">
             <p class="font-sans text-sm sm:text-base">
-              <span class="font-semibold">You must run these inside your project folder.</span> Check with <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">ls</code> — if you see <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">package.json</code>, you're in the right place.
+              <span class="font-semibold">You must run these inside your project folder.</span> Check with <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">ls</code> &mdash; if you see <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">package.json</code>, you're in the right place.
             </p>
           </div>
         </div>
         <div class="slide-footer text-text-secondary">
           <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
-          <span class="text-xs">|</span>
-          <span class="font-sans text-xs">VCF Office Hour</span>
         </div>
       </section>
 
-      <!-- ==================== SLIDE 8: Common Gotchas ==================== -->
+      <!-- ==================== SLIDE 8: Git Quick Reference ==================== -->
       <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="8">
         <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-center">
+            Git Commands Follow a Simple Pattern
+          </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary text-center mb-8">The commands you'll use every day. See the <span class="text-accent font-medium">GitHub 101</span> deck for the full picture.</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="animate-in bg-surface rounded-lg p-3 flex items-start gap-3">
+              <span class="bg-dark text-white font-mono text-xs rounded px-2 py-1 shrink-0 mt-0.5">git clone &lt;url&gt;</span>
+              <span class="font-sans text-sm text-text-secondary">Download a repo to your machine</span>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3 flex items-start gap-3">
+              <span class="bg-dark text-white font-mono text-xs rounded px-2 py-1 shrink-0 mt-0.5">git status</span>
+              <span class="font-sans text-sm text-text-secondary">See what's changed since last commit</span>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3 flex items-start gap-3">
+              <span class="bg-dark text-white font-mono text-xs rounded px-2 py-1 shrink-0 mt-0.5">git add .</span>
+              <span class="font-sans text-sm text-text-secondary">Stage all changes for commit</span>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3 flex items-start gap-3">
+              <span class="bg-dark text-white font-mono text-xs rounded px-2 py-1 shrink-0 mt-0.5">git commit -m "msg"</span>
+              <span class="font-sans text-sm text-text-secondary">Save a snapshot with a message</span>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3 flex items-start gap-3">
+              <span class="bg-dark text-white font-mono text-xs rounded px-2 py-1 shrink-0 mt-0.5">git push</span>
+              <span class="font-sans text-sm text-text-secondary">Upload your commits to GitHub</span>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3 flex items-start gap-3">
+              <span class="bg-dark text-white font-mono text-xs rounded px-2 py-1 shrink-0 mt-0.5">git checkout -b name</span>
+              <span class="font-sans text-sm text-text-secondary">Create and switch to a new branch</span>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 9: Common Gotchas ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="9">
+        <div class="max-w-4xl mx-auto w-full">
           <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
-            When Things Go Wrong
+            Every Error Has a One-Line Fix
           </h2>
           <div class="flex flex-col gap-3">
-            <div class="animate-in bg-surface rounded-lg shadow-sm p-4">
-              <p class="font-mono text-sm text-accent mb-1">command not found</p>
+            <div class="animate-in callout callout-error rounded-lg p-4">
+              <p class="font-mono text-sm font-semibold mb-1" style="color: #ef4444;">command not found</p>
               <p class="font-sans text-sm text-text-secondary">You're in the wrong folder or the tool isn't installed.</p>
             </div>
-            <div class="animate-in bg-surface rounded-lg shadow-sm p-4">
-              <p class="font-mono text-sm text-accent mb-1">EACCES permission denied</p>
+            <div class="animate-in callout callout-error rounded-lg p-4">
+              <p class="font-mono text-sm font-semibold mb-1" style="color: #ef4444;">EACCES permission denied</p>
               <p class="font-sans text-sm text-text-secondary">Try prefixing with <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">sudo</code> (carefully).</p>
             </div>
-            <div class="animate-in bg-surface rounded-lg shadow-sm p-4">
-              <p class="font-mono text-sm text-accent mb-1">port already in use</p>
+            <div class="animate-in callout callout-error rounded-lg p-4">
+              <p class="font-mono text-sm font-semibold mb-1" style="color: #ef4444;">port already in use</p>
               <p class="font-sans text-sm text-text-secondary">Another dev server is running; kill it or use a different port.</p>
             </div>
           </div>
         </div>
         <div class="slide-footer text-text-secondary">
           <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
-          <span class="text-xs">|</span>
-          <span class="font-sans text-xs">VCF Office Hour</span>
         </div>
       </section>
 
-      <!-- ==================== SLIDE 9: Helpful Shortcuts ==================== -->
-      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="9">
+      <!-- ==================== SLIDE 10: Helpful Shortcuts ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="10">
         <div class="max-w-4xl mx-auto w-full">
           <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
-            Helpful Shortcuts
+            These Shortcuts Save You Hours
           </h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div class="animate-in bg-surface rounded-lg p-3 flex items-center gap-3">
@@ -281,74 +385,139 @@
         </div>
         <div class="slide-footer text-text-secondary">
           <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
-          <span class="text-xs">|</span>
-          <span class="font-sans text-xs">VCF Office Hour</span>
         </div>
       </section>
 
-      <!-- ==================== SLIDE 10: Your First Session ==================== -->
-      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="10">
+      <!-- ==================== SLIDE 11: Your First Session (Animated) ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="11">
         <div class="max-w-4xl mx-auto w-full">
-          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
-            Try It: Your First Terminal Session
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            Try This Right Now
           </h2>
-          <div class="animate-in code-block text-sm sm:text-base">
-            <div class="mb-2"><span class="comment">1.</span> Open Terminal (<span class="string">Cmd+Space</span> &rarr; "Terminal")</div>
-            <div class="mb-2"><span class="comment">2.</span> <span class="prompt">$</span> cd ~/Documents/my-project</div>
-            <div class="mb-2"><span class="comment">3.</span> <span class="prompt">$</span> ls                          <span class="comment"># verify package.json exists</span></div>
-            <div class="mb-2"><span class="comment">4.</span> <span class="prompt">$</span> npm install</div>
-            <div class="mb-2"><span class="comment">5.</span> <span class="prompt">$</span> npm run dev</div>
-            <div><span class="comment">6.</span> Open browser &rarr; <span class="string">localhost:3000</span></div>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-4">Open Terminal (<span class="font-medium text-foreground">Cmd+Space</span> &rarr; type "Terminal")</p>
+          <div class="animate-in code-block terminal-demo text-sm sm:text-base">
+            <div class="typed-group">
+              <div><span class="typed-cmd" style="--chars: 29; --delay: 0.8s;"><span class="prompt">$</span> cd ~/Documents/my-project</span></div>
+            </div>
+            <div class="typed-group">
+              <div><span class="typed-cmd" style="--chars: 5; --delay: 3.2s;"><span class="prompt">$</span> ls</span></div>
+              <div class="typed-output string" style="--delay: 3.8s;">src/&nbsp; package.json&nbsp; README.md</div>
+            </div>
+            <div class="typed-group">
+              <div><span class="typed-cmd" style="--chars: 15; --delay: 5.3s;"><span class="prompt">$</span> npm install</span></div>
+              <div class="typed-output comment" style="--delay: 6.5s;">added 1,247 packages in 12s</div>
+            </div>
+            <div class="typed-group">
+              <div><span class="typed-cmd" style="--chars: 15; --delay: 8s;"><span class="prompt">$</span> npm run dev</span></div>
+              <div class="typed-output string" style="--delay: 9.2s;">ready &mdash; started server on localhost:3000</div>
+            </div>
           </div>
         </div>
         <div class="slide-footer text-text-secondary">
           <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
-          <span class="text-xs">|</span>
-          <span class="font-sans text-xs">VCF Office Hour</span>
         </div>
       </section>
 
-      <!-- ==================== SLIDE 11: Recap ==================== -->
-      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="11">
+      <!-- ==================== SLIDE 12: Recap ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="12">
         <div class="max-w-4xl mx-auto w-full">
-          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center">
-            5 Commands That Matter
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-center">
+            Bookmark This Slide
           </h2>
-          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-8">
-            <div class="animate-in bg-surface rounded-lg border-2 border-accent/30 p-3 text-center">
-              <p class="font-mono text-base sm:text-lg font-semibold text-accent mb-1">pwd</p>
-              <p class="font-sans text-xs text-text-secondary">Where am I?</p>
-            </div>
-            <div class="animate-in bg-surface rounded-lg border-2 border-accent/30 p-3 text-center">
-              <p class="font-mono text-base sm:text-lg font-semibold text-accent mb-1">cd</p>
-              <p class="font-sans text-xs text-text-secondary">Go somewhere</p>
-            </div>
-            <div class="animate-in bg-surface rounded-lg border-2 border-accent/30 p-3 text-center">
-              <p class="font-mono text-base sm:text-lg font-semibold text-accent mb-1">ls</p>
-              <p class="font-sans text-xs text-text-secondary">List files</p>
-            </div>
-            <div class="animate-in bg-surface rounded-lg border-2 border-accent/30 p-3 text-center">
-              <p class="font-mono text-base sm:text-lg font-semibold text-accent mb-1">code .</p>
-              <p class="font-sans text-xs text-text-secondary">Open editor</p>
-            </div>
-            <div class="animate-in bg-surface rounded-lg border-2 border-accent/30 p-3 text-center col-span-2 sm:col-span-1">
-              <p class="font-mono text-base sm:text-lg font-semibold text-accent mb-1">npm run dev</p>
-              <p class="font-sans text-xs text-text-secondary">Start server</p>
+
+          <!-- File System group -->
+          <div class="animate-in mb-4">
+            <p class="font-sans text-xs font-semibold text-text-secondary uppercase tracking-wide mb-2">File System</p>
+            <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+              <div class="bg-surface rounded-lg border-2 border-accent/30 p-2 text-center">
+                <p class="font-mono text-sm font-semibold text-accent">pwd</p>
+                <p class="font-sans text-[10px] text-text-secondary">Where am I?</p>
+              </div>
+              <div class="bg-surface rounded-lg border-2 border-accent/30 p-2 text-center">
+                <p class="font-mono text-sm font-semibold text-accent">cd</p>
+                <p class="font-sans text-[10px] text-text-secondary">Go somewhere</p>
+              </div>
+              <div class="bg-surface rounded-lg border-2 border-accent/30 p-2 text-center">
+                <p class="font-mono text-sm font-semibold text-accent">ls</p>
+                <p class="font-sans text-[10px] text-text-secondary">List files</p>
+              </div>
+              <div class="bg-surface rounded-lg border-2 border-accent/30 p-2 text-center">
+                <p class="font-mono text-sm font-semibold text-accent">mkdir</p>
+                <p class="font-sans text-[10px] text-text-secondary">New folder</p>
+              </div>
+              <div class="bg-surface rounded-lg border-2 border-accent/30 p-2 text-center">
+                <p class="font-mono text-sm font-semibold text-accent">touch</p>
+                <p class="font-sans text-[10px] text-text-secondary">New file</p>
+              </div>
+              <div class="bg-surface rounded-lg border-2 border-accent/30 p-2 text-center">
+                <p class="font-mono text-sm font-semibold text-accent">rm</p>
+                <p class="font-sans text-[10px] text-text-secondary">Delete</p>
+              </div>
             </div>
           </div>
+
+          <!-- Git group -->
+          <div class="animate-in mb-4">
+            <p class="font-sans text-xs font-semibold text-text-secondary uppercase tracking-wide mb-2">Git</p>
+            <div class="grid grid-cols-3 sm:grid-cols-7 gap-2">
+              <div class="bg-surface rounded-lg border-2 border-accent/30 p-2 text-center">
+                <p class="font-mono text-sm font-semibold text-accent">git clone</p>
+                <p class="font-sans text-[10px] text-text-secondary">Download repo</p>
+              </div>
+              <div class="bg-surface rounded-lg border-2 border-accent/30 p-2 text-center">
+                <p class="font-mono text-sm font-semibold text-accent">git status</p>
+                <p class="font-sans text-[10px] text-text-secondary">What changed?</p>
+              </div>
+              <div class="bg-surface rounded-lg border-2 border-accent/30 p-2 text-center">
+                <p class="font-mono text-sm font-semibold text-accent">git add .</p>
+                <p class="font-sans text-[10px] text-text-secondary">Stage changes</p>
+              </div>
+              <div class="bg-surface rounded-lg border-2 border-accent/30 p-2 text-center">
+                <p class="font-mono text-sm font-semibold text-accent">git commit</p>
+                <p class="font-sans text-[10px] text-text-secondary">Save snapshot</p>
+              </div>
+              <div class="bg-surface rounded-lg border-2 border-accent/30 p-2 text-center">
+                <p class="font-mono text-sm font-semibold text-accent">git push</p>
+                <p class="font-sans text-[10px] text-text-secondary">Upload</p>
+              </div>
+              <div class="bg-surface rounded-lg border-2 border-accent/30 p-2 text-center">
+                <p class="font-mono text-sm font-semibold text-accent">git branch</p>
+                <p class="font-sans text-[10px] text-text-secondary">New branch</p>
+              </div>
+              <div class="bg-surface rounded-lg border-2 border-accent/30 p-2 text-center">
+                <p class="font-mono text-sm font-semibold text-accent">git checkout</p>
+                <p class="font-sans text-[10px] text-text-secondary">Switch branch</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dev Tools row -->
+          <div class="animate-in mb-6">
+            <p class="font-sans text-xs font-semibold text-text-secondary uppercase tracking-wide mb-2">Dev Tools</p>
+            <div class="grid grid-cols-3 gap-2 max-w-md">
+              <div class="bg-surface rounded-lg border-2 border-accent/30 p-2 text-center">
+                <p class="font-mono text-sm font-semibold text-accent">code .</p>
+                <p class="font-sans text-[10px] text-text-secondary">Open editor</p>
+              </div>
+              <div class="bg-surface rounded-lg border-2 border-accent/30 p-2 text-center">
+                <p class="font-mono text-sm font-semibold text-accent">npm install</p>
+                <p class="font-sans text-[10px] text-text-secondary">Dependencies</p>
+              </div>
+              <div class="bg-surface rounded-lg border-2 border-accent/30 p-2 text-center">
+                <p class="font-mono text-sm font-semibold text-accent">npm run dev</p>
+                <p class="font-sans text-[10px] text-text-secondary">Start server</p>
+              </div>
+            </div>
+          </div>
+
           <div class="animate-in text-center space-y-1">
             <p class="font-sans text-sm text-text-secondary">
               Install Oh My Zsh: <a href="https://ohmyz.sh" class="text-accent underline underline-offset-2 hover:text-accent-light transition-colors">ohmyz.sh</a>
             </p>
-            <p class="font-sans text-sm text-text-secondary">
-              Questions? Ask in the VCF Slack.
-            </p>
           </div>
         </div>
         <div class="slide-footer text-text-secondary">
           <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
-          <span class="text-xs">|</span>
-          <span class="font-sans text-xs">VCF Office Hour</span>
         </div>
       </section>
 
@@ -360,7 +529,7 @@
 
     <!-- Slide counter -->
     <div id="slide-counter" class="absolute bottom-6 right-8 font-sans text-sm text-text-secondary z-50">
-      <span id="current-num">1</span> / <span id="total-num">11</span>
+      <span id="current-num">1</span> / <span id="total-num">12</span>
     </div>
   </div>
 

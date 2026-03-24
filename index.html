@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Study Camp</title>
+
+  <!-- Tailwind v3 Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#F5F0EB',
+            foreground: '#1C1917',
+            accent: '#0D9488',
+            'accent-light': '#14B8A6',
+            surface: '#FFFFFF',
+            'text-secondary': '#78716C',
+            dark: '#1C1917',
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    .deck-card {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .deck-card:hover {
+      background: rgba(255, 255, 255, 0.75);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08),
+                  0 0 20px rgba(13, 148, 136, 0.12);
+      transform: translateY(-4px);
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-in {
+      opacity: 0;
+      animation: fadeSlideUp 0.5s ease forwards;
+    }
+
+    .animate-in:nth-child(1) { animation-delay: 0.1s; }
+    .animate-in:nth-child(2) { animation-delay: 0.2s; }
+    .animate-in:nth-child(3) { animation-delay: 0.3s; }
+    .animate-in:nth-child(4) { animation-delay: 0.4s; }
+    .animate-in:nth-child(5) { animation-delay: 0.5s; }
+  </style>
+</head>
+<body class="bg-background text-foreground font-sans min-h-screen flex items-center justify-center p-8">
+  <div class="max-w-3xl mx-auto w-full">
+    <div class="text-center mb-12">
+      <h1 class="animate-in font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-foreground">
+        AI Study Camp
+      </h1>
+      <div class="animate-in w-16 h-px bg-accent mx-auto my-6"></div>
+      <p class="animate-in font-sans text-lg text-text-secondary">
+        Vibe Coding foundational concepts
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <a href="terminal-101.html" class="animate-in deck-card rounded-xl p-6 flex items-center gap-5 no-underline text-foreground">
+        <span class="shrink-0 w-10 h-10 rounded-lg bg-dark text-white font-mono text-sm font-semibold flex items-center justify-center">01</span>
+        <div>
+          <h2 class="font-serif text-xl font-semibold mb-1">Terminal 101</h2>
+          <p class="font-sans text-sm text-text-secondary">Your command line survival guide</p>
+        </div>
+      </a>
+
+      <a href="github-101.html" class="animate-in deck-card rounded-xl p-6 flex items-center gap-5 no-underline text-foreground">
+        <span class="shrink-0 w-10 h-10 rounded-lg bg-dark text-white font-mono text-sm font-semibold flex items-center justify-center">02</span>
+        <div>
+          <h2 class="font-serif text-xl font-semibold mb-1">Git &amp; GitHub 101</h2>
+          <p class="font-sans text-sm text-text-secondary">Version control from first commit to pull request</p>
+        </div>
+      </a>
+
+      <a href="claude-md-and-repo.html" class="animate-in deck-card rounded-xl p-6 flex items-center gap-5 no-underline text-foreground">
+        <span class="shrink-0 w-10 h-10 rounded-lg bg-dark text-white font-mono text-sm font-semibold flex items-center justify-center">03</span>
+        <div>
+          <h2 class="font-serif text-xl font-semibold mb-1">CLAUDE.md, Skills &amp; Repo Architecture</h2>
+          <p class="font-sans text-sm text-text-secondary">Structure your project for AI-assisted development</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="text-center mt-12">
+      <p class="font-sans text-xs text-text-secondary font-medium tracking-wide">AI STUDY CAMP</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -208,6 +208,179 @@ html, body {
   .glass-card:hover {
     transform: none !important;
   }
+
+  .slide.active .typed-cmd {
+    max-width: calc(var(--chars, 10) * 1ch) !important;
+    opacity: 1 !important;
+    border-right-color: transparent !important;
+    animation: none !important;
+  }
+
+  .slide.active .typed-output {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+
+/* --- Terminal Typing Animation --- */
+@keyframes typingReveal {
+  0% {
+    max-width: 0;
+    opacity: 1;
+    border-right-color: var(--accent);
+  }
+  100% {
+    max-width: calc(var(--chars, 10) * 1ch);
+    opacity: 1;
+    border-right-color: var(--accent);
+  }
+}
+
+@keyframes blink-caret {
+  0%, 100% { border-right-color: var(--accent); }
+  50% { border-right-color: transparent; }
+}
+
+.typed-cmd {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 0;
+  opacity: 0;
+  border-right: 2px solid transparent;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  vertical-align: bottom;
+}
+
+.slide.active .typed-cmd {
+  animation:
+    typingReveal calc(var(--chars, 10) * 0.07s) steps(var(--chars, 10), end) var(--delay, 0s) forwards,
+    blink-caret 0.75s step-end infinite var(--delay, 0s);
+}
+
+.typed-output {
+  opacity: 0;
+  display: block;
+}
+
+.slide.active .typed-output {
+  animation: fadeSlideUp 0.3s ease var(--delay, 0s) forwards;
+}
+
+.terminal-demo {
+  white-space: normal;
+}
+
+.terminal-demo .typed-group {
+  margin-bottom: 0.75rem;
+}
+
+.terminal-demo .typed-group:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Layered Diagram --- */
+.layer-outer {
+  border: 2px solid var(--accent);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(var(--accent-rgb), 0.03);
+}
+
+.layer-middle {
+  border: 2px solid rgba(var(--accent-rgb), 0.5);
+  border-radius: 0.625rem;
+  padding: 1rem 1.25rem;
+  margin-top: 0.75rem;
+  background: rgba(var(--accent-rgb), 0.04);
+}
+
+.layer-inner {
+  border: 2px solid rgba(var(--accent-rgb), 0.3);
+  border-radius: 0.5rem;
+  padding: 0.875rem 1rem;
+  margin-top: 0.75rem;
+  background: rgba(var(--accent-rgb), 0.06);
+}
+
+.layer-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+/* --- File Tree --- */
+.file-tree {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 2;
+  color: var(--text-secondary);
+}
+
+.file-tree .current {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* --- Terminal Window Illustration --- */
+.terminal-window {
+  border-radius: 0.625rem;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.terminal-titlebar {
+  background: #2d2d2d;
+  padding: 0.6rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.terminal-dot-red { background: #ff5f57; }
+.terminal-dot-yellow { background: #febc2e; }
+.terminal-dot-green { background: #28c840; }
+
+.terminal-titlebar-text {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.terminal-body {
+  background: var(--dark);
+  color: #e5e5e5;
+  padding: 1rem 1.25rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  line-height: 1.8;
+  min-height: 8rem;
+}
+
+.terminal-body .prompt {
+  color: var(--accent);
+}
+
+.terminal-body .output {
+  color: var(--text-secondary);
+}
+
+/* --- Error Callout --- */
+.callout-error {
+  border-left-color: #ef4444;
+  background: rgba(239, 68, 68, 0.06);
 }
 
 /* --- Scrollbar for code blocks --- */
