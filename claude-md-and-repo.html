@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLAUDE.md, Skills &amp; Repo Architecture — VCF Office Hour</title>
+
+  <!-- Tailwind v3 Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#F5F0EB',
+            foreground: '#1C1917',
+            accent: '#0D9488',
+            'accent-light': '#14B8A6',
+            surface: '#FFFFFF',
+            'text-secondary': '#78716C',
+            dark: '#1C1917',
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Shared slide CSS -->
+  <link rel="stylesheet" href="shared/slides.css">
+</head>
+<body class="bg-background text-foreground font-sans">
+  <div id="slide-deck" class="relative w-screen h-screen overflow-hidden">
+    <!-- Progress bar -->
+    <div id="progress-bar" class="absolute top-0 left-0 h-1 bg-accent transition-all duration-300 z-50"></div>
+
+    <!-- Slides container -->
+    <div id="slides" class="relative w-full h-full">
+
+      <!-- ==================== SLIDE 1: Title ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="1">
+        <div class="max-w-4xl mx-auto w-full text-center">
+          <h1 class="animate-in font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-foreground leading-tight">
+            CLAUDE.md, Skills &amp;<br>Repo Architecture
+          </h1>
+          <div class="animate-in accent-divider mx-auto my-6"></div>
+          <p class="animate-in font-sans text-lg sm:text-xl text-text-secondary">
+            Structure your project for AI-assisted development
+          </p>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 2: What is CLAUDE.md? ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="2">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
+            Your AI's Instruction Manual
+          </h2>
+          <div class="flex flex-col gap-3 mb-6">
+            <div class="animate-in flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
+              <p class="font-sans text-sm sm:text-base leading-relaxed">
+                <span class="font-semibold">CLAUDE.md</span> is a special file Claude reads at the start of every conversation
+              </p>
+            </div>
+            <div class="animate-in flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
+              <p class="font-sans text-sm sm:text-base leading-relaxed">
+                Include bash commands, code style, workflow rules &mdash; persistent context Claude can't infer from code alone
+              </p>
+            </div>
+            <div class="animate-in flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
+              <p class="font-sans text-sm sm:text-base leading-relaxed">
+                Run <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">/init</code> to generate a starter file, then refine over time
+              </p>
+            </div>
+            <div class="animate-in flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
+              <p class="font-sans text-sm sm:text-base leading-relaxed">
+                Check it into git so the whole team benefits
+              </p>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm sm:text-base">
+              &ldquo;The Anthropic team keeps their CLAUDE.md at ~2.5k tokens. Concise is better.&rdquo;
+            </p>
+            <p class="font-sans text-xs text-text-secondary italic mt-1">— Boris Cherny, Claude Code creator</p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 3: What to Include (and What to Skip) ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="3">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            What Goes in CLAUDE.md
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-5">
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5">
+              <h3 class="font-sans text-sm font-bold text-accent uppercase tracking-wide mb-3">Include</h3>
+              <ul class="space-y-2">
+                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Bash commands Claude can't guess</li>
+                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Code style rules that differ from defaults</li>
+                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Testing instructions &amp; preferred runners</li>
+                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Repo etiquette (branch naming, PR conventions)</li>
+                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Architectural decisions</li>
+                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Common gotchas</li>
+              </ul>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5">
+              <h3 class="font-sans text-sm font-bold text-text-secondary uppercase tracking-wide mb-3">Skip</h3>
+              <ul class="space-y-2">
+                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> Anything Claude figures out from code</li>
+                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> Standard language conventions</li>
+                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> Detailed API docs (link instead)</li>
+                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> Info that changes frequently</li>
+                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> File-by-file codebase descriptions</li>
+                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> Self-evident practices (&ldquo;write clean code&rdquo;)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm sm:text-base">
+              After every correction, update your CLAUDE.md so you don't make that mistake again.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 4: CLAUDE.md Example ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="4">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            A Real CLAUDE.md
+          </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-6">From Boris Cherny's team at Anthropic (~2.5k tokens total)</p>
+          <div class="animate-in code-block text-xs sm:text-sm mb-5">
+<span class="comment"># Code style</span>
+- Always use <span class="string">bun</span>, not npm
+- Never use <span class="keyword">enum</span> &mdash; prefer string literal unions
+- Prefer <span class="keyword">type</span> over <span class="keyword">interface</span>
+- Use ES modules (import/export), not CommonJS
+
+<span class="comment"># Workflow</span>
+- Always typecheck after a series of code changes
+- Run single tests, not the whole suite, for performance
+- Prefer running <span class="string">bun run test:unit</span> over the full suite
+
+<span class="comment"># Gotchas</span>
+- The /api routes use edge runtime, not Node
+- The billing library requires a tenant context</div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              &ldquo;Anytime we see Claude do something incorrectly, we add it to CLAUDE.md so Claude knows not to do it next time.&rdquo;
+            </p>
+            <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Boris Cherny</p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 5: The #1 Best Practice ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="5">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            Give Claude a Way to Verify Its Work
+          </h2>
+          <p class="animate-in font-serif text-xl sm:text-2xl md:text-3xl text-accent font-semibold leading-snug mb-8">
+            &ldquo;This is the single highest-leverage thing you can do.&rdquo;
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5 border border-transparent">
+              <h3 class="font-sans text-xs font-bold text-text-secondary uppercase tracking-wide mb-2">Before</h3>
+              <p class="font-sans text-sm text-text-secondary">
+                &ldquo;Implement email validation&rdquo;
+              </p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5 border-2 border-accent">
+              <h3 class="font-sans text-xs font-bold text-accent uppercase tracking-wide mb-2">After</h3>
+              <p class="font-sans text-sm">
+                &ldquo;Write validateEmail. Test cases: user@example.com &rarr; true, 'invalid' &rarr; false. Run tests after implementing.&rdquo;
+              </p>
+            </div>
+          </div>
+          <p class="animate-in font-sans text-sm sm:text-base text-text-secondary">
+            Tests, screenshots, linters, bash commands &mdash; invest in making verification rock-solid. This 2&ndash;3x the quality.
+          </p>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 6: Plan First, Code Second ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="6">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
+            The Recommended Workflow
+          </h2>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+            <div class="animate-in flex flex-col items-center text-center">
+              <div class="w-10 h-10 rounded-full bg-accent text-white font-sans font-bold text-lg flex items-center justify-center mb-3">1</div>
+              <h3 class="font-sans text-sm font-semibold mb-1">Explore</h3>
+              <p class="font-sans text-xs text-text-secondary">Enter Plan Mode, read files, understand the codebase</p>
+            </div>
+            <div class="animate-in flex flex-col items-center text-center">
+              <div class="w-10 h-10 rounded-full bg-accent text-white font-sans font-bold text-lg flex items-center justify-center mb-3">2</div>
+              <h3 class="font-sans text-sm font-semibold mb-1">Plan</h3>
+              <p class="font-sans text-xs text-text-secondary">Ask Claude for a detailed implementation plan</p>
+            </div>
+            <div class="animate-in flex flex-col items-center text-center">
+              <div class="w-10 h-10 rounded-full bg-accent text-white font-sans font-bold text-lg flex items-center justify-center mb-3">3</div>
+              <h3 class="font-sans text-sm font-semibold mb-1">Implement</h3>
+              <p class="font-sans text-xs text-text-secondary">Switch to Normal Mode, let Claude code against the plan</p>
+            </div>
+            <div class="animate-in flex flex-col items-center text-center">
+              <div class="w-10 h-10 rounded-full bg-accent text-white font-sans font-bold text-lg flex items-center justify-center mb-3">4</div>
+              <h3 class="font-sans text-sm font-semibold mb-1">Commit</h3>
+              <p class="font-sans text-xs text-text-secondary">Descriptive message, open a PR</p>
+            </div>
+          </div>
+          <div class="animate-in callout mb-4">
+            <p class="font-sans text-sm sm:text-base">
+              Go back and forth with Claude until you like the plan, then switch to auto-accept. Claude usually 1-shots it.
+            </p>
+          </div>
+          <p class="animate-in font-sans text-xs text-text-secondary">
+            Skip planning for trivial tasks &mdash; typos, single-line changes, simple renames.
+          </p>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 7: What Are Skills? ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="7">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+            Teaching Claude New Tricks
+          </h2>
+          <p class="animate-in font-sans text-sm sm:text-base leading-relaxed mb-5">
+            Skills extend Claude's knowledge with project-specific workflows. Here's a real one from the Anthropic docs:
+          </p>
+          <div class="animate-in code-block text-xs sm:text-sm mb-4">
+<span class="comment"># .claude/skills/fix-issue/SKILL.md</span>
+<span class="keyword">---</span>
+<span class="string">name</span>: fix-issue
+<span class="string">description</span>: Fix a GitHub issue
+<span class="string">disable-model-invocation</span>: <span class="keyword">true</span>
+<span class="keyword">---</span>
+Analyze and fix the GitHub issue: <span class="string">$ARGUMENTS</span>
+
+1. Use <span class="prompt">`gh issue view`</span> to get details
+2. Search the codebase for relevant files
+3. Implement the fix
+4. Write and run tests to verify
+5. Create a descriptive commit message
+6. Push and create a PR</div>
+          <p class="animate-in font-sans text-sm sm:text-base mb-4">
+            Type <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">/fix-issue 1234</code> and Claude handles the rest.
+          </p>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              &ldquo;Skills have become one of the most used extension points in Claude Code.&rdquo;
+            </p>
+            <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Thariq, Anthropic</p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 8: 9 Types of Skills ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="8">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            A Taxonomy of Skills
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
+            <div class="animate-in bg-surface rounded-lg p-3">
+              <p class="font-sans text-sm font-semibold mb-0.5">Library &amp; API Reference</p>
+              <p class="font-mono text-[11px] text-accent mb-1">billing-lib</p>
+              <p class="font-sans text-xs text-text-secondary">Internal library edge cases, code snippets, gotchas</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3">
+              <p class="font-sans text-sm font-semibold mb-0.5">Product Verification</p>
+              <p class="font-mono text-[11px] text-accent mb-1">checkout-verifier</p>
+              <p class="font-sans text-xs text-text-secondary">Drives checkout UI with Stripe test cards</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3">
+              <p class="font-sans text-sm font-semibold mb-0.5">Data Fetching</p>
+              <p class="font-mono text-[11px] text-accent mb-1">funnel-query</p>
+              <p class="font-sans text-xs text-text-secondary">Which events to join for signup &rarr; paid</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3">
+              <p class="font-sans text-sm font-semibold mb-0.5">Business Process</p>
+              <p class="font-mono text-[11px] text-accent mb-1">standup-post</p>
+              <p class="font-sans text-xs text-text-secondary">Aggregates tickets, GitHub activity, Slack</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3">
+              <p class="font-sans text-sm font-semibold mb-0.5">Code Scaffolding</p>
+              <p class="font-mono text-[11px] text-accent mb-1">new-migration</p>
+              <p class="font-sans text-xs text-text-secondary">Migration template plus common gotchas</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3">
+              <p class="font-sans text-sm font-semibold mb-0.5">Code Quality</p>
+              <p class="font-mono text-[11px] text-accent mb-1">adversarial-review</p>
+              <p class="font-sans text-xs text-text-secondary">Fresh-eyes subagent critiques your code</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3">
+              <p class="font-sans text-sm font-semibold mb-0.5">CI/CD &amp; Deploy</p>
+              <p class="font-mono text-[11px] text-accent mb-1">babysit-pr</p>
+              <p class="font-sans text-xs text-text-secondary">Monitors PR, retries flaky CI, resolves conflicts</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3">
+              <p class="font-sans text-sm font-semibold mb-0.5">Runbooks</p>
+              <p class="font-mono text-[11px] text-accent mb-1">oncall-runner</p>
+              <p class="font-sans text-xs text-text-secondary">Fetches alert, checks usual suspects, formats finding</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3">
+              <p class="font-sans text-sm font-semibold mb-0.5">Infrastructure</p>
+              <p class="font-mono text-[11px] text-accent mb-1">dependency-management</p>
+              <p class="font-sans text-xs text-text-secondary">Your org's dependency approval workflow</p>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              &ldquo;It can be worth having an engineer spend a week just making your verification skills excellent.&rdquo;
+            </p>
+            <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Thariq, Anthropic</p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 9: Anatomy of a Repo ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="9">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
+            What a Good Project Looks Like
+          </h2>
+          <div class="animate-in code-block text-xs sm:text-sm">
+my-app/
+  .env.local          <span class="comment">&larr; secrets (gitignored)</span>
+  .gitignore          <span class="comment">&larr; what Git should skip</span>
+  CLAUDE.md           <span class="comment">&larr; AI instructions</span>
+  README.md           <span class="comment">&larr; human instructions</span>
+  package.json        <span class="comment">&larr; dependencies</span>
+  .claude/
+    skills/           <span class="comment">&larr; reusable AI workflows</span>
+    commands/          <span class="comment">&larr; slash commands</span>
+    agents/            <span class="comment">&larr; custom subagents</span>
+    settings.json      <span class="comment">&larr; permissions, hooks</span>
+  src/
+    app/              <span class="comment">&larr; pages &amp; routes</span>
+    components/       <span class="comment">&larr; reusable UI</span>
+    lib/              <span class="comment">&larr; utilities &amp; helpers</span>
+  public/             <span class="comment">&larr; static assets</span></div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 10: The .claude/ Directory ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="10">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            Inside .claude/
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-4">
+              <p class="font-mono text-sm text-accent font-semibold mb-2">skills/</p>
+              <p class="font-sans text-sm text-text-secondary">SKILL.md files with domain knowledge &mdash; <code class="font-mono text-xs">billing-lib</code>, <code class="font-mono text-xs">checkout-verifier</code>, <code class="font-mono text-xs">fix-issue</code></p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-4">
+              <p class="font-mono text-sm text-accent font-semibold mb-2">commands/</p>
+              <p class="font-sans text-sm text-text-secondary">Boris's daily drivers: <code class="font-mono text-xs">/commit-push-pr</code> and <code class="font-mono text-xs">/techdebt</code> (finds duplicated code at session end)</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-4">
+              <p class="font-mono text-sm text-accent font-semibold mb-2">agents/</p>
+              <p class="font-sans text-sm text-text-secondary">Boris's subagents: <code class="font-mono text-xs">code-simplifier</code>, <code class="font-mono text-xs">verify-app</code>, <code class="font-mono text-xs">build-validator</code></p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-4">
+              <p class="font-mono text-sm text-accent font-semibold mb-2">settings.json</p>
+              <p class="font-sans text-xs text-text-secondary mb-2">Boris's PostToolUse hook &mdash; auto-formats after every edit:</p>
+              <div class="code-block !p-2.5 !rounded-lg !text-[11px] !leading-snug">
+{ <span class="string">"matcher"</span>: <span class="string">"Write|Edit"</span>,
+  <span class="string">"hooks"</span>: [{ <span class="string">"command"</span>: <span class="string">"bun run format || true"</span> }] }</div>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              &ldquo;I use a <code class="font-mono text-xs">/commit-push-pr</code> slash command dozens of times every day.&rdquo;
+            </p>
+            <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Boris Cherny, Claude Code creator</p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 11: Power Tips ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="11">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            Level Up
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-2">Hooks</h3>
+              <p class="font-sans text-sm text-text-secondary mb-2">
+                Boris's setup: <code class="font-mono text-[11px]">"Write|Edit"</code> matcher triggers <code class="font-mono text-[11px]">bun run format</code> after every file change.
+              </p>
+              <p class="font-sans text-xs text-text-secondary italic">
+                Also: stop hooks for verification, PostCompact hooks to re-inject critical context.
+              </p>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-2">Permissions</h3>
+              <p class="font-sans text-sm text-text-secondary mb-2">
+                Pre-allow safe commands via <code class="font-mono text-[11px]">/permissions</code>:
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                <code class="font-mono text-[10px] bg-dark/10 rounded px-1.5 py-0.5">Bash(bun run build:*)</code>
+                <code class="font-mono text-[10px] bg-dark/10 rounded px-1.5 py-0.5">Bash(bun run test:*)</code>
+                <code class="font-mono text-[10px] bg-dark/10 rounded px-1.5 py-0.5">Bash(gh pr diff:*)</code>
+              </div>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-2">Parallel Sessions</h3>
+              <p class="font-sans text-sm text-text-secondary">
+                Boris runs 5 local terminal tabs + 5&ndash;10 on the web, each in its own git worktree. &ldquo;Single biggest productivity unlock.&rdquo;
+              </p>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-2">Spec-Based Workflow</h3>
+              <p class="font-sans text-sm text-text-secondary">
+                Thariq's approach: start with a minimal spec &rarr; ask Claude to interview you &rarr; execute in a fresh session with clean context.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 12: Recap ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="12">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center">
+            Three Takeaways
+          </h2>
+          <div class="flex flex-col gap-5 mb-8">
+            <div class="animate-in flex items-start gap-4">
+              <span class="shrink-0 w-10 h-10 rounded-full bg-accent text-white font-sans font-bold text-lg flex items-center justify-center">1</span>
+              <p class="font-sans text-sm sm:text-base leading-relaxed pt-2">
+                <span class="font-semibold">CLAUDE.md</span> = onboarding for your AI pair programmer. Keep it concise, update after every mistake.
+              </p>
+            </div>
+            <div class="animate-in flex items-start gap-4">
+              <span class="shrink-0 w-10 h-10 rounded-full bg-accent text-white font-sans font-bold text-lg flex items-center justify-center">2</span>
+              <p class="font-sans text-sm sm:text-base leading-relaxed pt-2">
+                <span class="font-semibold">Skills</span> = reusable domain knowledge that scales across your team.
+              </p>
+            </div>
+            <div class="animate-in flex items-start gap-4">
+              <span class="shrink-0 w-10 h-10 rounded-full bg-accent text-white font-sans font-bold text-lg flex items-center justify-center">3</span>
+              <p class="font-sans text-sm sm:text-base leading-relaxed pt-2">
+                <span class="font-semibold">Verification</span> = the #1 lever for quality. Give Claude a way to check its own work.
+              </p>
+            </div>
+          </div>
+          <div class="animate-in text-center">
+            <p class="font-serif text-base sm:text-lg italic text-text-secondary leading-relaxed">
+              Structure is leverage. The better your repo is organized, the better Claude Code performs.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Click navigation zones -->
+    <div id="nav-prev" class="absolute left-0 top-0 w-1/5 h-full cursor-pointer z-40"></div>
+    <div id="nav-next" class="absolute right-0 top-0 w-1/5 h-full cursor-pointer z-40"></div>
+
+    <!-- Slide counter -->
+    <div id="slide-counter" class="absolute bottom-6 right-8 font-sans text-sm text-text-secondary z-50">
+      <span id="current-num">1</span> / <span id="total-num">12</span>
+    </div>
+  </div>
+
+  <script src="shared/slides.js"></script>
+</body>
+</html>

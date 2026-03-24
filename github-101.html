@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Git &amp; GitHub 101</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#F5F0EB',
+            foreground: '#1C1917',
+            accent: '#0D9488',
+            'accent-light': '#14B8A6',
+            surface: '#FFFFFF',
+            'text-secondary': '#78716C',
+            dark: '#1C1917',
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="shared/slides.css">
+</head>
+<body class="bg-background text-foreground font-sans">
+  <div id="slide-deck" class="relative w-screen h-screen overflow-hidden">
+    <div id="progress-bar" class="absolute top-0 left-0 h-1 bg-accent transition-all duration-300 z-50"></div>
+    <div id="slides" class="relative w-full h-full">
+
+      <!-- ======================== SLIDE 1 — Title ======================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="1">
+        <div class="max-w-4xl mx-auto w-full text-center">
+          <div class="animate-in">
+            <div class="accent-divider mx-auto mb-8"></div>
+          </div>
+          <h1 class="animate-in font-serif text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
+            Git &amp; GitHub 101
+          </h1>
+          <p class="animate-in text-text-secondary text-lg sm:text-xl md:text-2xl font-light mb-8">
+            Version control for vibe coders
+          </p>
+          <div class="animate-in">
+            <div class="accent-divider mx-auto"></div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+        </div>
+      </section>
+
+      <!-- ======================== SLIDE 2 — Git vs GitHub ======================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="2">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl font-bold mb-8 text-center">
+            Git vs GitHub
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="animate-in glass-card rounded-xl p-6">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-lg bg-dark flex items-center justify-center flex-shrink-0">
+                  <span class="font-mono text-accent text-sm font-semibold">&gt;_</span>
+                </div>
+                <h3 class="font-serif text-xl font-semibold">Git</h3>
+              </div>
+              <p class="text-text-secondary leading-relaxed">
+                A version control tool on your computer. It tracks every change to your code.
+              </p>
+              <div class="mt-4 bg-dark rounded-lg px-3 py-2">
+                <code class="font-mono text-xs text-accent">$ git commit -m "save point"</code>
+              </div>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-6">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
+                  </svg>
+                </div>
+                <h3 class="font-serif text-xl font-semibold">GitHub</h3>
+              </div>
+              <p class="text-text-secondary leading-relaxed">
+                A website where you store and share your Git projects in the cloud.
+              </p>
+              <div class="mt-4 bg-accent/5 border border-accent/20 rounded-lg px-3 py-2">
+                <span class="font-mono text-xs text-accent">github.com/you/your-project</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+        </div>
+      </section>
+
+      <!-- ======================== SLIDE 3 — Setup ======================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="3">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl font-bold mb-8 text-center">
+            Get Started in 3 Steps
+          </h2>
+          <div class="space-y-4">
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-4 flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center font-sans font-bold text-sm flex-shrink-0 mt-0.5">1</div>
+              <div>
+                <h3 class="font-sans font-semibold text-lg mb-1">Install Git</h3>
+                <p class="text-text-secondary text-sm mb-2">Check if it's already installed by running:</p>
+                <code class="font-mono text-sm bg-dark text-accent px-3 py-1 rounded-md inline-block">git --version</code>
+              </div>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-4 flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center font-sans font-bold text-sm flex-shrink-0 mt-0.5">2</div>
+              <div>
+                <h3 class="font-sans font-semibold text-lg mb-1">Create a GitHub Account</h3>
+                <p class="text-text-secondary text-sm">Sign up at <span class="font-mono text-accent">github.com</span> — it's free for personal use.</p>
+              </div>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-4 flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center font-sans font-bold text-sm flex-shrink-0 mt-0.5">3</div>
+              <div>
+                <h3 class="font-sans font-semibold text-lg mb-1">Install GitHub Desktop</h3>
+                <p class="text-text-secondary text-sm">A visual interface for Git operations. Great for beginners and quick undo actions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+        </div>
+      </section>
+
+      <!-- ======================== SLIDE 4 — Creating a Repo ======================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="4">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl font-bold mb-8 text-center">
+            Your Project's Home
+          </h2>
+          <div class="animate-in bg-surface rounded-xl shadow-sm p-6 mb-6">
+            <h3 class="font-sans font-semibold text-lg mb-4">When creating a new repo, you need:</h3>
+            <ul class="space-y-2 text-text-secondary">
+              <li class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"></span>
+                <span><strong class="text-foreground">Name</strong> — short, descriptive, kebab-case</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"></span>
+                <span><strong class="text-foreground">Description</strong> — one line about what it does</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"></span>
+                <span><strong class="text-foreground">Visibility</strong> — set to <span class="font-mono text-sm bg-dark text-accent px-1.5 py-0.5 rounded">Private</span></span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"></span>
+                <span><strong class="text-foreground">README</strong> — check "Add a README file"</span>
+              </li>
+            </ul>
+          </div>
+          <div class="animate-in callout callout-warning text-sm">
+            <p>
+              <strong class="text-foreground">Always set repos to Private.</strong>
+              If you ever had a public repo with API keys, make it private <em>and</em> rotate those keys immediately.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+        </div>
+      </section>
+
+      <!-- ======================== SLIDE 5 — Local vs Remote ======================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="5">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl font-bold mb-8 text-center">
+            Local vs Remote
+          </h2>
+          <div class="animate-in flex flex-col sm:flex-row items-center gap-4 sm:gap-6 mb-6">
+            <!-- Local box -->
+            <div class="flex-1 w-full border-2 border-accent rounded-xl p-5 bg-surface">
+              <h3 class="font-serif text-lg font-semibold mb-2 text-accent">Local</h3>
+              <p class="text-text-secondary text-sm leading-relaxed">
+                Your computer. Where you and Claude Code make edits.
+              </p>
+            </div>
+            <!-- Arrow connector -->
+            <div class="flex flex-col items-center gap-1 flex-shrink-0">
+              <svg class="w-8 h-8 text-accent hidden sm:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+              </svg>
+              <svg class="w-8 h-8 text-accent sm:hidden rotate-90" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+              </svg>
+              <span class="font-mono text-xs text-accent whitespace-nowrap">push / pull</span>
+            </div>
+            <!-- Remote box -->
+            <div class="flex-1 w-full border-2 border-accent rounded-xl p-5 bg-surface">
+              <h3 class="font-serif text-lg font-semibold mb-2 text-accent">Remote (Origin)</h3>
+              <p class="text-text-secondary text-sm leading-relaxed">
+                GitHub. The cloud backup your team can see.
+              </p>
+            </div>
+          </div>
+          <div class="animate-in callout text-sm">
+            <p>Changes don't sync automatically. <strong class="text-foreground">You have to push.</strong></p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+        </div>
+      </section>
+
+      <!-- ======================== SLIDE 6 — The Basic Flow ======================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="6">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl font-bold mb-8 text-center">
+            The Basic Flow
+          </h2>
+          <div class="animate-in grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-8">
+            <!-- Step 1 -->
+            <div class="relative bg-surface rounded-xl p-4 shadow-sm text-center">
+              <div class="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center font-sans font-bold text-sm mx-auto mb-3">1</div>
+              <p class="font-sans text-sm font-medium">Make changes locally</p>
+              <div class="hidden sm:block absolute top-1/2 -right-3 -translate-y-1/2 text-accent font-bold text-lg">&rarr;</div>
+            </div>
+            <!-- Step 2 -->
+            <div class="relative bg-surface rounded-xl p-4 shadow-sm text-center">
+              <div class="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center font-sans font-bold text-sm mx-auto mb-3">2</div>
+              <p class="font-sans text-sm font-medium">Test your app</p>
+              <p class="font-sans text-xs text-text-secondary mt-1">Run it, check localhost</p>
+              <div class="hidden sm:block absolute top-1/2 -right-3 -translate-y-1/2 text-accent font-bold text-lg">&rarr;</div>
+            </div>
+            <!-- Step 3 -->
+            <div class="relative bg-surface rounded-xl p-4 shadow-sm text-center">
+              <div class="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center font-sans font-bold text-sm mx-auto mb-3">3</div>
+              <p class="font-sans text-sm font-medium">Commit</p>
+              <p class="font-sans text-xs text-text-secondary mt-1">Snapshot with a message</p>
+              <div class="hidden sm:block absolute top-1/2 -right-3 -translate-y-1/2 text-accent font-bold text-lg">&rarr;</div>
+            </div>
+            <!-- Step 4 -->
+            <div class="bg-surface rounded-xl p-4 shadow-sm text-center">
+              <div class="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center font-sans font-bold text-sm mx-auto mb-3">4</div>
+              <p class="font-sans text-sm font-medium">Push to origin</p>
+              <p class="font-sans text-xs text-text-secondary mt-1">Upload to GitHub</p>
+            </div>
+          </div>
+          <div class="animate-in callout text-sm">
+            <p>
+              <strong class="text-foreground">Pro tip:</strong> Commit often. Every time something works, commit it. This creates save points you can return to.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+        </div>
+      </section>
+
+      <!-- ======================== SLIDE 7 — Clone vs Fork ======================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="7">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl font-bold mb-8 text-center">
+            Clone vs Fork
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="animate-in glass-card rounded-xl p-6">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                  </svg>
+                </div>
+                <h3 class="font-serif text-xl font-semibold">Clone</h3>
+              </div>
+              <p class="text-text-secondary text-sm leading-relaxed mb-4">
+                Download a repo to your computer to work on it.
+              </p>
+              <div class="code-block text-xs">
+                <span class="prompt">$</span> git clone https://github.com/user/repo.git
+              </div>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-6">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
+                  </svg>
+                </div>
+                <h3 class="font-serif text-xl font-semibold">Fork</h3>
+              </div>
+              <p class="text-text-secondary text-sm leading-relaxed mb-4">
+                Create your own copy of someone else's repo on GitHub.
+              </p>
+              <div class="bg-accent/5 border border-accent/20 rounded-lg px-4 py-3">
+                <p class="font-sans text-xs text-text-secondary">Click the <strong class="text-foreground">"Fork"</strong> button on any GitHub repo page</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+        </div>
+      </section>
+
+      <!-- ======================== SLIDE 8 — Branches ======================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="8">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl font-bold mb-2 text-center">
+            Branches
+          </h2>
+          <p class="animate-in text-text-secondary text-center mb-8">Work without breaking production</p>
+
+          <!-- Branch diagram -->
+          <div class="animate-in bg-surface rounded-xl shadow-sm p-6 mb-6">
+            <div class="relative py-4">
+              <!-- Main branch line -->
+              <div class="flex items-center gap-0 mb-8">
+                <span class="font-mono text-xs font-semibold text-foreground bg-dark text-white px-2 py-1 rounded-md mr-3 flex-shrink-0">main</span>
+                <div class="flex-1 h-1 bg-dark rounded-full relative">
+                  <div class="absolute left-1/4 top-1/2 -translate-y-1/2 w-3 h-3 bg-dark rounded-full border-2 border-background"></div>
+                  <div class="absolute left-1/2 top-1/2 -translate-y-1/2 w-3 h-3 bg-dark rounded-full border-2 border-background"></div>
+                  <div class="absolute left-3/4 top-1/2 -translate-y-1/2 w-3 h-3 bg-accent rounded-full border-2 border-background"></div>
+                  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-dark rounded-full border-2 border-background"></div>
+                </div>
+              </div>
+              <!-- Feature branch line -->
+              <div class="flex items-center gap-0 ml-16 sm:ml-24">
+                <span class="font-mono text-xs font-semibold text-white bg-accent px-2 py-1 rounded-md mr-3 flex-shrink-0">feature</span>
+                <div class="flex-1 h-1 bg-accent rounded-full relative" style="max-width: 50%;">
+                  <div class="absolute left-1/3 top-1/2 -translate-y-1/2 w-3 h-3 bg-accent rounded-full border-2 border-background"></div>
+                  <div class="absolute left-2/3 top-1/2 -translate-y-1/2 w-3 h-3 bg-accent rounded-full border-2 border-background"></div>
+                </div>
+              </div>
+              <!-- Connector lines (CSS pseudo-elements simulated) -->
+              <div class="absolute left-1/3 top-6 w-0.5 h-8 bg-accent/40 ml-16 sm:ml-24"></div>
+            </div>
+            <div class="flex items-center justify-center gap-2 text-xs text-text-secondary mt-2 font-sans">
+              <span class="bg-dark text-white px-2 py-0.5 rounded">main</span>
+              <span>&rarr;</span>
+              <span>create branch</span>
+              <span>&rarr;</span>
+              <span class="text-accent font-medium">build &amp; test</span>
+              <span>&rarr;</span>
+              <span>merge back</span>
+            </div>
+          </div>
+
+          <div class="animate-in callout text-sm">
+            <p>Think of branches as <strong class="text-foreground">parallel copies</strong> of your project. Experiment freely without affecting the main code.</p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+        </div>
+      </section>
+
+      <!-- ======================== SLIDE 9 — Pull Requests ======================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="9">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl font-bold mb-2 text-center">
+            Pull Requests
+          </h2>
+          <p class="animate-in text-text-secondary text-center mb-8">Propose merging your branch</p>
+
+          <div class="space-y-3">
+            <div class="animate-in flex items-start gap-3">
+              <div class="w-7 h-7 rounded-full bg-accent text-white flex items-center justify-center font-sans font-bold text-xs flex-shrink-0 mt-0.5">1</div>
+              <p class="font-sans text-sm sm:text-base"><strong>Push your branch</strong> to GitHub</p>
+            </div>
+            <div class="animate-in flex items-start gap-3">
+              <div class="w-7 h-7 rounded-full bg-accent text-white flex items-center justify-center font-sans font-bold text-xs flex-shrink-0 mt-0.5">2</div>
+              <p class="font-sans text-sm sm:text-base"><strong>Go to your repo on GitHub</strong> — you'll see a prompt to create a PR</p>
+            </div>
+            <div class="animate-in flex items-start gap-3">
+              <div class="w-7 h-7 rounded-full bg-accent text-white flex items-center justify-center font-sans font-bold text-xs flex-shrink-0 mt-0.5">3</div>
+              <p class="font-sans text-sm sm:text-base"><strong>Write a description</strong> of what changed and why</p>
+            </div>
+            <div class="animate-in flex items-start gap-3">
+              <div class="w-7 h-7 rounded-full bg-accent text-white flex items-center justify-center font-sans font-bold text-xs flex-shrink-0 mt-0.5">4</div>
+              <p class="font-sans text-sm sm:text-base"><strong>Team reviews code</strong> and tests your build</p>
+            </div>
+            <div class="animate-in flex items-start gap-3">
+              <div class="w-7 h-7 rounded-full bg-accent text-white flex items-center justify-center font-sans font-bold text-xs flex-shrink-0 mt-0.5">5</div>
+              <p class="font-sans text-sm sm:text-base">Once approved, click <strong>"Merge"</strong></p>
+            </div>
+          </div>
+
+          <p class="animate-in text-text-secondary text-xs sm:text-sm mt-6 text-center">
+            Working solo? You can skip PRs and merge directly.
+          </p>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+        </div>
+      </section>
+
+      <!-- ======================== SLIDE 10 — .gitignore & Secrets ======================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="10">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl font-bold mb-2 text-center">
+            .gitignore &amp; Secrets
+          </h2>
+          <p class="animate-in text-text-secondary text-center mb-8">Protect your secrets</p>
+
+          <div class="animate-in code-block mb-6">
+            <div><span class="comment"># .gitignore — files Git should never track</span></div>
+            <div class="mt-2"><span class="string">.env</span></div>
+            <div><span class="string">.env.local</span></div>
+            <div><span class="string">.env.production</span></div>
+            <div class="mt-2"><span class="comment"># Dependencies & OS files</span></div>
+            <div><span class="string">node_modules/</span></div>
+            <div><span class="string">.DS_Store</span></div>
+          </div>
+
+          <div class="animate-in callout text-sm">
+            <p>
+              <strong class="text-foreground">Pro tip:</strong> Ask Claude Code to create a <code class="font-mono text-xs bg-dark text-accent px-1.5 py-0.5 rounded">.gitignore</code> for you when you start any project.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+        </div>
+      </section>
+
+      <!-- ======================== SLIDE 11 — Undoing Mistakes & Recap ======================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="11">
+        <div class="max-w-4xl mx-auto w-full">
+          <!-- Top half: Undoing Mistakes -->
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl font-bold mb-4 text-center">
+            When Things Go Sideways
+          </h2>
+          <div class="animate-in grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+            <div class="bg-surface rounded-lg shadow-sm p-3 text-center">
+              <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-2">
+                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                </svg>
+              </div>
+              <p class="font-sans text-xs font-medium">Tell Claude to undo</p>
+            </div>
+            <div class="bg-surface rounded-lg shadow-sm p-3 text-center">
+              <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-2">
+                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                </svg>
+              </div>
+              <p class="font-sans text-xs font-medium">Use <code class="font-mono text-accent">/rewind</code></p>
+            </div>
+            <div class="bg-surface rounded-lg shadow-sm p-3 text-center">
+              <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-2">
+                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+                </svg>
+              </div>
+              <p class="font-sans text-xs font-medium">GitHub Desktop &rarr; Discard</p>
+            </div>
+          </div>
+          <p class="animate-in text-text-secondary text-xs text-center mb-6">Commit often — every commit is a save point!</p>
+
+          <!-- Bottom half: Key Commands & Commit Messages -->
+          <div class="animate-in">
+            <h3 class="font-serif text-lg font-semibold mb-3 text-center">Key Commands</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-5">
+              <div class="bg-dark rounded-lg px-3 py-2 text-center">
+                <code class="font-mono text-xs text-accent">git clone</code>
+              </div>
+              <div class="bg-dark rounded-lg px-3 py-2 text-center">
+                <code class="font-mono text-xs text-accent">git add .</code>
+              </div>
+              <div class="bg-dark rounded-lg px-3 py-2 text-center">
+                <code class="font-mono text-xs text-accent">git commit -m ""</code>
+              </div>
+              <div class="bg-dark rounded-lg px-3 py-2 text-center">
+                <code class="font-mono text-xs text-accent">git push</code>
+              </div>
+              <div class="bg-dark rounded-lg px-3 py-2 text-center">
+                <code class="font-mono text-xs text-accent">git pull</code>
+              </div>
+              <div class="bg-dark rounded-lg px-3 py-2 text-center">
+                <code class="font-mono text-xs text-accent">git log</code>
+              </div>
+            </div>
+          </div>
+
+          <div class="animate-in grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="bg-accent/5 border border-accent/20 rounded-lg px-4 py-3">
+              <p class="font-sans text-xs text-accent font-semibold mb-1">Good commit message</p>
+              <p class="font-mono text-xs text-foreground">"Add Stripe payment flow to checkout page"</p>
+            </div>
+            <div class="bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+              <p class="font-sans text-xs text-red-500 font-semibold mb-1">Bad commit message</p>
+              <p class="font-mono text-xs text-foreground">"updated stuff"</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Navigation zones -->
+    <div id="nav-prev" class="absolute left-0 top-0 w-1/5 h-full cursor-pointer z-40"></div>
+    <div id="nav-next" class="absolute right-0 top-0 w-1/5 h-full cursor-pointer z-40"></div>
+
+    <!-- Slide counter -->
+    <div id="slide-counter" class="absolute bottom-6 right-8 font-sans text-sm text-text-secondary z-50">
+      <span id="current-num">1</span> / <span id="total-num">11</span>
+    </div>
+  </div>
+
+  <script src="shared/slides.js"></script>
+</body>
+</html>

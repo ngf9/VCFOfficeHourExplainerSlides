@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terminal 101 — VCF Office Hour</title>
+
+  <!-- Tailwind v3 Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#F5F0EB',
+            foreground: '#1C1917',
+            accent: '#0D9488',
+            'accent-light': '#14B8A6',
+            surface: '#FFFFFF',
+            'text-secondary': '#78716C',
+            dark: '#1C1917',
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Shared slide CSS -->
+  <link rel="stylesheet" href="shared/slides.css">
+</head>
+<body class="bg-background text-foreground font-sans">
+  <div id="slide-deck" class="relative w-screen h-screen overflow-hidden">
+    <!-- Progress bar -->
+    <div id="progress-bar" class="absolute top-0 left-0 h-1 bg-accent transition-all duration-300 z-50"></div>
+
+    <!-- Slides container -->
+    <div id="slides" class="relative w-full h-full">
+
+      <!-- ==================== SLIDE 1: Title ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="1">
+        <div class="max-w-4xl mx-auto w-full text-center">
+          <h1 class="animate-in font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-foreground">
+            Terminal 101
+          </h1>
+          <div class="animate-in accent-divider mx-auto my-6"></div>
+          <p class="animate-in font-sans text-lg text-text-secondary">
+            Your command line survival guide
+          </p>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 2: Grounding Framework ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="2">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center">
+            The Basics: Three Terms to Know
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="animate-in glass-card rounded-xl p-5 text-center">
+              <h3 class="font-serif text-lg font-semibold mb-2">Terminal</h3>
+              <p class="font-sans text-sm text-text-secondary">
+                The app where you type commands. A text-based window into your computer's operating system.
+              </p>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5 text-center">
+              <h3 class="font-serif text-lg font-semibold mb-2">Command Language</h3>
+              <p class="font-sans text-sm text-text-secondary">
+                The syntax the terminal understands — Bash and Zsh are examples. The grammar you use to talk to your machine.
+              </p>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5 text-center">
+              <h3 class="font-serif text-lg font-semibold mb-2">CLI</h3>
+              <p class="font-sans text-sm text-text-secondary">
+                Command Line Interface — the text-based alternative to clicking buttons in a graphical interface (GUI).
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 3: What is a Shell? ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="3">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center">
+            What is Bash? Zsh? Oh My Zsh?
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="animate-in glass-card rounded-xl p-5 text-center">
+              <h3 class="font-serif text-lg font-semibold mb-2">Bash</h3>
+              <p class="font-sans text-sm text-text-secondary">
+                The original command language. Historically the default on macOS and Linux.
+              </p>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5 text-center">
+              <h3 class="font-serif text-lg font-semibold mb-2">Zsh</h3>
+              <p class="font-sans text-sm text-text-secondary">
+                A modern shell that replaced Bash as macOS default in 2019. Better defaults, smarter features.
+              </p>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5 text-center">
+              <h3 class="font-serif text-lg font-semibold mb-2">Oh My Zsh</h3>
+              <p class="font-sans text-sm text-text-secondary">
+                Not a shell — a framework on top of Zsh. Adds themes, plugins, and helpful shortcuts.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 4: Why the Terminal Matters ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="4">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
+            Why the Terminal Matters
+          </h2>
+          <p class="animate-in font-sans text-base sm:text-lg leading-relaxed mb-6 drop-cap">
+            Every tool you use — VS Code, Claude Code, npm, git — runs through the terminal under the hood. Learning a handful of commands gives you direct control over your development environment.
+          </p>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm sm:text-base font-medium">
+              You only need about 10 commands to be productive.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 5: Navigation Commands ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="5">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
+            Navigation: 3 Key Commands
+          </h2>
+          <div class="animate-in code-block text-sm sm:text-base">
+            <div class="mb-2"><span class="prompt">$</span> pwd          <span class="comment"># Where am I? Shows your current folder</span></div>
+            <div class="mb-2"><span class="prompt">$</span> cd my-app    <span class="comment"># Go somewhere. Use cd .. to go back up</span></div>
+            <div><span class="prompt">$</span> ls           <span class="comment"># What's in this folder? Lists files</span></div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 6: Opening VS Code ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="6">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
+            Open Your Editor from Terminal
+          </h2>
+          <div class="animate-in code-block text-sm sm:text-base mb-6">
+            <div><span class="prompt">$</span> code .</div>
+          </div>
+          <p class="animate-in font-sans text-base sm:text-lg text-text-secondary mb-6">
+            Opens the current folder in VS Code. The fastest way to get your editor open with the right project loaded.
+          </p>
+          <div class="animate-in inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-2">
+            <span class="font-mono text-xs font-semibold text-accent">PRO TIP</span>
+            <span class="font-sans text-sm text-foreground">
+              Make sure you've installed the <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">code</code> command from VS Code's command palette (Cmd+Shift+P &rarr; "Install code command")
+            </span>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 7: npm Basics ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="7">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
+            npm: Two Commands You Need
+          </h2>
+          <div class="animate-in code-block text-sm sm:text-base mb-6">
+            <div class="mb-2"><span class="prompt">$</span> npm install   <span class="comment"># Install all dependencies</span></div>
+            <div><span class="prompt">$</span> npm run dev   <span class="comment"># Start the dev server &rarr; localhost:3000</span></div>
+          </div>
+          <div class="animate-in callout callout-warning">
+            <p class="font-sans text-sm sm:text-base">
+              <span class="font-semibold">You must run these inside your project folder.</span> Check with <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">ls</code> — if you see <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">package.json</code>, you're in the right place.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 8: Common Gotchas ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="8">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
+            When Things Go Wrong
+          </h2>
+          <div class="flex flex-col gap-3">
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-4">
+              <p class="font-mono text-sm text-accent mb-1">command not found</p>
+              <p class="font-sans text-sm text-text-secondary">You're in the wrong folder or the tool isn't installed.</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-4">
+              <p class="font-mono text-sm text-accent mb-1">EACCES permission denied</p>
+              <p class="font-sans text-sm text-text-secondary">Try prefixing with <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">sudo</code> (carefully).</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-4">
+              <p class="font-mono text-sm text-accent mb-1">port already in use</p>
+              <p class="font-sans text-sm text-text-secondary">Another dev server is running; kill it or use a different port.</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 9: Helpful Shortcuts ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="9">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
+            Helpful Shortcuts
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="animate-in bg-surface rounded-lg p-3 flex items-center gap-3">
+              <span class="bg-dark text-white font-mono text-xs rounded px-2 py-1 shrink-0">Tab</span>
+              <span class="font-sans text-sm">Autocomplete file/folder names</span>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3 flex items-center gap-3">
+              <span class="bg-dark text-white font-mono text-xs rounded px-2 py-1 shrink-0">Ctrl+C</span>
+              <span class="font-sans text-sm">Stop a running process</span>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3 flex items-center gap-3">
+              <span class="bg-dark text-white font-mono text-xs rounded px-2 py-1 shrink-0">Ctrl+L</span>
+              <span class="font-sans text-sm">Clear the screen</span>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3 flex items-center gap-3">
+              <span class="bg-dark text-white font-mono text-xs rounded px-2 py-1 shrink-0">&uarr; Arrow</span>
+              <span class="font-sans text-sm">Cycle through command history</span>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3 flex items-center gap-3 sm:col-span-2 sm:w-1/2">
+              <span class="bg-dark text-white font-mono text-xs rounded px-2 py-1 shrink-0">!!</span>
+              <span class="font-sans text-sm">Repeat last command</span>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 10: Your First Session ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="10">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
+            Try It: Your First Terminal Session
+          </h2>
+          <div class="animate-in code-block text-sm sm:text-base">
+            <div class="mb-2"><span class="comment">1.</span> Open Terminal (<span class="string">Cmd+Space</span> &rarr; "Terminal")</div>
+            <div class="mb-2"><span class="comment">2.</span> <span class="prompt">$</span> cd ~/Documents/my-project</div>
+            <div class="mb-2"><span class="comment">3.</span> <span class="prompt">$</span> ls                          <span class="comment"># verify package.json exists</span></div>
+            <div class="mb-2"><span class="comment">4.</span> <span class="prompt">$</span> npm install</div>
+            <div class="mb-2"><span class="comment">5.</span> <span class="prompt">$</span> npm run dev</div>
+            <div><span class="comment">6.</span> Open browser &rarr; <span class="string">localhost:3000</span></div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 11: Recap ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="11">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center">
+            5 Commands That Matter
+          </h2>
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-8">
+            <div class="animate-in bg-surface rounded-lg border-2 border-accent/30 p-3 text-center">
+              <p class="font-mono text-base sm:text-lg font-semibold text-accent mb-1">pwd</p>
+              <p class="font-sans text-xs text-text-secondary">Where am I?</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg border-2 border-accent/30 p-3 text-center">
+              <p class="font-mono text-base sm:text-lg font-semibold text-accent mb-1">cd</p>
+              <p class="font-sans text-xs text-text-secondary">Go somewhere</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg border-2 border-accent/30 p-3 text-center">
+              <p class="font-mono text-base sm:text-lg font-semibold text-accent mb-1">ls</p>
+              <p class="font-sans text-xs text-text-secondary">List files</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg border-2 border-accent/30 p-3 text-center">
+              <p class="font-mono text-base sm:text-lg font-semibold text-accent mb-1">code .</p>
+              <p class="font-sans text-xs text-text-secondary">Open editor</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg border-2 border-accent/30 p-3 text-center col-span-2 sm:col-span-1">
+              <p class="font-mono text-base sm:text-lg font-semibold text-accent mb-1">npm run dev</p>
+              <p class="font-sans text-xs text-text-secondary">Start server</p>
+            </div>
+          </div>
+          <div class="animate-in text-center space-y-1">
+            <p class="font-sans text-sm text-text-secondary">
+              Install Oh My Zsh: <a href="https://ohmyz.sh" class="text-accent underline underline-offset-2 hover:text-accent-light transition-colors">ohmyz.sh</a>
+            </p>
+            <p class="font-sans text-sm text-text-secondary">
+              Questions? Ask in the VCF Slack.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <span class="font-sans text-xs font-medium tracking-wide">AI STUDY CAMP</span>
+          <span class="text-xs">|</span>
+          <span class="font-sans text-xs">VCF Office Hour</span>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Click navigation zones -->
+    <div id="nav-prev" class="absolute left-0 top-0 w-1/5 h-full cursor-pointer z-40"></div>
+    <div id="nav-next" class="absolute right-0 top-0 w-1/5 h-full cursor-pointer z-40"></div>
+
+    <!-- Slide counter -->
+    <div id="slide-counter" class="absolute bottom-6 right-8 font-sans text-sm text-text-secondary z-50">
+      <span id="current-num">1</span> / <span id="total-num">11</span>
+    </div>
+  </div>
+
+  <script src="shared/slides.js"></script>
+</body>
+</html>
