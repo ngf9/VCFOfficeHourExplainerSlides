@@ -96,12 +96,18 @@
                 Check it into git so the whole team benefits
               </p>
             </div>
+            <div class="animate-in flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
+              <p class="font-sans text-sm sm:text-base leading-relaxed">
+                <span class="font-semibold">Compound engineering:</span> every correction you add makes every future Claude session smarter
+              </p>
+            </div>
           </div>
           <div class="animate-in callout">
             <p class="font-sans text-sm sm:text-base">
               &ldquo;The Anthropic team keeps their CLAUDE.md at ~2.5k tokens. Concise is better.&rdquo;
             </p>
-            <p class="font-sans text-xs text-text-secondary italic mt-1">— Boris Cherny, Claude Code creator</p>
+            <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Boris Cherny, Claude Code creator</p>
           </div>
         </div>
         <div class="slide-footer text-text-secondary">
@@ -144,8 +150,9 @@
           </div>
           <div class="animate-in callout">
             <p class="font-sans text-sm sm:text-base">
-              After every correction, update your CLAUDE.md so you don't make that mistake again.
+              There&rsquo;s a ~150&ndash;200 instruction budget before compliance drops off. Every line should earn its place.
             </p>
+            <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Anthropic best practices</p>
           </div>
         </div>
         <div class="slide-footer text-text-secondary">
@@ -238,7 +245,7 @@
             <div class="animate-in flex flex-col items-center text-center">
               <div class="w-10 h-10 rounded-full bg-accent text-white font-sans font-bold text-lg flex items-center justify-center mb-3">1</div>
               <h3 class="font-sans text-sm font-semibold mb-1">Explore</h3>
-              <p class="font-sans text-xs text-text-secondary">Enter Plan Mode, read files, understand the codebase</p>
+              <p class="font-sans text-xs text-text-secondary">Hit <code class="font-mono text-[10px]">Shift+Tab</code> for Plan Mode, read files, understand the codebase</p>
             </div>
             <div class="animate-in flex flex-col items-center text-center">
               <div class="w-10 h-10 rounded-full bg-accent text-white font-sans font-bold text-lg flex items-center justify-center mb-3">2</div>
@@ -297,8 +304,11 @@ Analyze and fix the GitHub issue: <span class="string">$ARGUMENTS</span>
 4. Write and run tests to verify
 5. Create a descriptive commit message
 6. Push and create a PR</div>
-          <p class="animate-in font-sans text-sm sm:text-base mb-4">
+          <p class="animate-in font-sans text-sm sm:text-base mb-2">
             Type <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">/fix-issue 1234</code> and Claude handles the rest.
+          </p>
+          <p class="animate-in font-sans text-xs text-text-secondary mb-4">
+            Skills can also inject live data with <code class="font-mono text-[11px] bg-dark/10 rounded px-1 py-0.5">!`gh pr diff`</code> &mdash; shell output gets pulled in before Claude sees the prompt.
           </p>
           <div class="animate-in callout">
             <p class="font-sans text-sm">
@@ -393,6 +403,7 @@ Analyze and fix the GitHub issue: <span class="string">$ARGUMENTS</span>
 my-app/
   .env.local          <span class="comment">&larr; secrets (gitignored)</span>
   .gitignore          <span class="comment">&larr; what Git should skip</span>
+  .mcp.json           <span class="comment">&larr; external tools (Slack, Jira, DBs)</span>
   CLAUDE.md           <span class="comment">&larr; AI instructions</span>
   README.md           <span class="comment">&larr; human instructions</span>
   package.json        <span class="comment">&larr; dependencies</span>
@@ -448,6 +459,9 @@ my-app/
             </p>
             <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Boris Cherny, Claude Code creator</p>
           </div>
+          <p class="animate-in font-sans text-xs text-text-secondary mt-3">
+            <span class="font-semibold text-foreground">Plugins</span> bundle skills, hooks, commands, and MCP into one installable package &mdash; great for sharing across teams.
+          </p>
         </div>
         <div class="slide-footer text-text-secondary">
           <div class="flex flex-col items-start">
