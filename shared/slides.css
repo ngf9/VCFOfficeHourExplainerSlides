@@ -178,6 +178,28 @@ html, body {
   background: linear-gradient(to left, rgba(0,0,0,0.02), transparent);
 }
 
+/* --- Home Button --- */
+.home-btn {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  color: var(--text-secondary);
+  transition: color 0.2s ease, background 0.2s ease;
+  text-decoration: none;
+}
+
+.home-btn:hover {
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.08);
+}
+
 /* --- Slide Footer Branding --- */
 .slide-footer {
   position: absolute;
