@@ -43,6 +43,11 @@
     <!-- Progress bar -->
     <div id="progress-bar" class="absolute top-0 left-0 h-1 bg-accent transition-all duration-300 z-50"></div>
 
+    <!-- Home button -->
+    <a href="index.html" class="home-btn" title="Back to home">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </a>
+
     <!-- Slides container -->
     <div id="slides" class="relative w-full h-full">
 
@@ -54,7 +59,7 @@
           </h1>
           <div class="animate-in accent-divider mx-auto my-6"></div>
           <p class="animate-in font-sans text-lg sm:text-xl text-text-secondary">
-            Structure your project for AI-assisted development
+            Build a great AI-assisted development process
           </p>
         </div>
         <div class="slide-footer text-text-secondary">
@@ -65,50 +70,17 @@
         </div>
       </section>
 
-      <!-- ==================== SLIDE 2: What is CLAUDE.md? ==================== -->
+      <!-- ==================== SLIDE 2: What is Claude Code? ==================== -->
       <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="2">
         <div class="max-w-4xl mx-auto w-full">
-          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
-            Your AI's Instruction Manual
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-center">
+            What is Claude Code?
           </h2>
-          <div class="flex flex-col gap-3 mb-6">
-            <div class="animate-in flex items-start gap-3">
-              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
-              <p class="font-sans text-sm sm:text-base leading-relaxed">
-                <span class="font-semibold">CLAUDE.md</span> is a special file Claude reads at the start of every conversation
-              </p>
-            </div>
-            <div class="animate-in flex items-start gap-3">
-              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
-              <p class="font-sans text-sm sm:text-base leading-relaxed">
-                Include bash commands, code style, workflow rules &mdash; persistent context Claude can't infer from code alone
-              </p>
-            </div>
-            <div class="animate-in flex items-start gap-3">
-              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
-              <p class="font-sans text-sm sm:text-base leading-relaxed">
-                Run <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">/init</code> to generate a starter file, then refine over time
-              </p>
-            </div>
-            <div class="animate-in flex items-start gap-3">
-              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
-              <p class="font-sans text-sm sm:text-base leading-relaxed">
-                Check it into git so the whole team benefits
-              </p>
-            </div>
-            <div class="animate-in flex items-start gap-3">
-              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
-              <p class="font-sans text-sm sm:text-base leading-relaxed">
-                <span class="font-semibold">Compound engineering:</span> every correction you add makes every future Claude session smarter
-              </p>
-            </div>
-          </div>
-          <div class="animate-in callout">
-            <p class="font-sans text-sm sm:text-base">
-              &ldquo;The Anthropic team keeps their CLAUDE.md at ~2.5k tokens. Concise is better.&rdquo;
-            </p>
-            <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Boris Cherny, Claude Code creator</p>
-          </div>
+          <p class="animate-in font-sans text-sm sm:text-base text-text-secondary text-center mb-8">
+            You give instructions. Claude reads, writes, searches, and executes.
+          </p>
+
+          <!-- WIP: diagram placeholder -->
         </div>
         <div class="slide-footer text-text-secondary">
           <div class="flex flex-col items-start">
@@ -118,129 +90,15 @@
         </div>
       </section>
 
-      <!-- ==================== SLIDE 3: What to Include (and What to Skip) ==================== -->
+      <!-- ==================== SLIDE 3: The Recommended Workflow ==================== -->
       <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="3">
         <div class="max-w-4xl mx-auto w-full">
-          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
-            What Goes in CLAUDE.md
-          </h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-5">
-            <div class="animate-in bg-surface rounded-lg shadow-sm p-5">
-              <h3 class="font-sans text-sm font-bold text-accent uppercase tracking-wide mb-3">Include</h3>
-              <ul class="space-y-2">
-                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Bash commands Claude can't guess</li>
-                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Code style rules that differ from defaults</li>
-                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Testing instructions &amp; preferred runners</li>
-                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Repo etiquette (branch naming, PR conventions)</li>
-                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Architectural decisions</li>
-                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Common gotchas</li>
-              </ul>
-            </div>
-            <div class="animate-in bg-surface rounded-lg shadow-sm p-5">
-              <h3 class="font-sans text-sm font-bold text-text-secondary uppercase tracking-wide mb-3">Skip</h3>
-              <ul class="space-y-2">
-                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> Anything Claude figures out from code</li>
-                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> Standard language conventions</li>
-                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> Detailed API docs (link instead)</li>
-                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> Info that changes frequently</li>
-                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> File-by-file codebase descriptions</li>
-                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> Self-evident practices (&ldquo;write clean code&rdquo;)</li>
-              </ul>
-            </div>
-          </div>
-          <div class="animate-in callout">
-            <p class="font-sans text-sm sm:text-base">
-              There&rsquo;s a ~150&ndash;200 instruction budget before compliance drops off. Every line should earn its place.
-            </p>
-            <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Anthropic best practices</p>
-          </div>
-        </div>
-        <div class="slide-footer text-text-secondary">
-          <div class="flex flex-col items-start">
-            <img src="[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
-            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== SLIDE 4: CLAUDE.md Example ==================== -->
-      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="4">
-        <div class="max-w-4xl mx-auto w-full">
-          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
-            A Real CLAUDE.md
-          </h2>
-          <p class="animate-in font-sans text-sm text-text-secondary mb-6">From Boris Cherny's team at Anthropic (~2.5k tokens total)</p>
-          <div class="animate-in code-block text-xs sm:text-sm mb-5">
-<span class="comment"># Code style</span>
-- Always use <span class="string">bun</span>, not npm
-- Never use <span class="keyword">enum</span> &mdash; prefer string literal unions
-- Prefer <span class="keyword">type</span> over <span class="keyword">interface</span>
-- Use ES modules (import/export), not CommonJS
-
-<span class="comment"># Workflow</span>
-- Always typecheck after a series of code changes
-- Run single tests, not the whole suite, for performance
-- Prefer running <span class="string">bun run test:unit</span> over the full suite
-
-<span class="comment"># Gotchas</span>
-- The /api routes use edge runtime, not Node
-- The billing library requires a tenant context</div>
-          <div class="animate-in callout">
-            <p class="font-sans text-sm">
-              &ldquo;Anytime we see Claude do something incorrectly, we add it to CLAUDE.md so Claude knows not to do it next time.&rdquo;
-            </p>
-            <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Boris Cherny</p>
-          </div>
-        </div>
-        <div class="slide-footer text-text-secondary">
-          <div class="flex flex-col items-start">
-            <img src="[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
-            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== SLIDE 5: The #1 Best Practice ==================== -->
-      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="5">
-        <div class="max-w-4xl mx-auto w-full">
-          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
-            Give Claude a Way to Verify Its Work
-          </h2>
-          <p class="animate-in font-serif text-xl sm:text-2xl md:text-3xl text-accent font-semibold leading-snug mb-8">
-            &ldquo;This is the single highest-leverage thing you can do.&rdquo;
-          </p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-            <div class="animate-in bg-surface rounded-lg shadow-sm p-5 border border-transparent">
-              <h3 class="font-sans text-xs font-bold text-text-secondary uppercase tracking-wide mb-2">Before</h3>
-              <p class="font-sans text-sm text-text-secondary">
-                &ldquo;Implement email validation&rdquo;
-              </p>
-            </div>
-            <div class="animate-in bg-surface rounded-lg shadow-sm p-5 border-2 border-accent">
-              <h3 class="font-sans text-xs font-bold text-accent uppercase tracking-wide mb-2">After</h3>
-              <p class="font-sans text-sm">
-                &ldquo;Write validateEmail. Test cases: user@example.com &rarr; true, 'invalid' &rarr; false. Run tests after implementing.&rdquo;
-              </p>
-            </div>
-          </div>
-          <p class="animate-in font-sans text-sm sm:text-base text-text-secondary">
-            Tests, screenshots, linters, bash commands &mdash; invest in making verification rock-solid. This 2&ndash;3x the quality.
-          </p>
-        </div>
-        <div class="slide-footer text-text-secondary">
-          <div class="flex flex-col items-start">
-            <img src="[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
-            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== SLIDE 6: Plan First, Code Second ==================== -->
-      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="6">
-        <div class="max-w-4xl mx-auto w-full">
-          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
             The Recommended Workflow
           </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-8">
+            This is the big picture. The rest of this deck teaches you each piece.
+          </p>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
             <div class="animate-in flex flex-col items-center text-center">
               <div class="w-10 h-10 rounded-full bg-accent text-white font-sans font-bold text-lg flex items-center justify-center mb-3">1</div>
@@ -280,14 +138,224 @@
         </div>
       </section>
 
-      <!-- ==================== SLIDE 7: What Are Skills? ==================== -->
+      <!-- ==================== SLIDE 4: Section Title — Part 1 ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="4">
+        <div class="max-w-4xl mx-auto w-full text-center">
+          <p class="animate-in font-mono text-6xl sm:text-7xl md:text-8xl font-bold text-accent/20 mb-4">01</p>
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+            The CLAUDE.md File
+          </h2>
+          <div class="animate-in accent-divider mx-auto my-6"></div>
+          <p class="animate-in font-sans text-base sm:text-lg text-text-secondary">
+            Your AI&rsquo;s persistent memory
+          </p>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 5: Your AI's Instruction Manual ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="5">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
+            Your AI&rsquo;s Instruction Manual
+          </h2>
+          <div class="flex flex-col gap-3 mb-6">
+            <div class="animate-in flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
+              <p class="font-sans text-sm sm:text-base leading-relaxed">
+                <span class="font-semibold">CLAUDE.md</span> is a special file Claude reads at the start of every conversation
+              </p>
+            </div>
+            <div class="animate-in flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
+              <p class="font-sans text-sm sm:text-base leading-relaxed">
+                Include bash commands, code style, workflow rules &mdash; persistent context Claude can&rsquo;t infer from code alone
+              </p>
+            </div>
+            <div class="animate-in flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
+              <p class="font-sans text-sm sm:text-base leading-relaxed">
+                Run <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">/init</code> to generate a starter file, then refine over time
+              </p>
+            </div>
+            <div class="animate-in flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
+              <p class="font-sans text-sm sm:text-base leading-relaxed">
+                Check it into git so the whole team benefits
+              </p>
+            </div>
+            <div class="animate-in flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
+              <p class="font-sans text-sm sm:text-base leading-relaxed">
+                <span class="font-semibold">Compound engineering:</span> every correction you add makes every future Claude session smarter
+              </p>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm sm:text-base">
+              &ldquo;The Anthropic team keeps their CLAUDE.md at ~2.5k tokens. Concise is better.&rdquo;
+            </p>
+            <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Boris Cherny, Claude Code creator</p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 6: What Goes in CLAUDE.md ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="6">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            What Goes in CLAUDE.md
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-5">
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5">
+              <h3 class="font-sans text-sm font-bold text-accent uppercase tracking-wide mb-3">Include</h3>
+              <ul class="space-y-2">
+                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Bash commands Claude can&rsquo;t guess</li>
+                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Code style rules that differ from defaults</li>
+                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Testing instructions &amp; preferred runners</li>
+                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Repo etiquette (branch naming, PR conventions)</li>
+                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Architectural decisions</li>
+                <li class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Common gotchas</li>
+              </ul>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5">
+              <h3 class="font-sans text-sm font-bold text-text-secondary uppercase tracking-wide mb-3">Skip</h3>
+              <ul class="space-y-2">
+                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> Anything Claude figures out from code</li>
+                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> Standard language conventions</li>
+                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> Detailed API docs (link instead)</li>
+                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> Info that changes frequently</li>
+                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> File-by-file codebase descriptions</li>
+                <li class="font-sans text-sm flex items-start gap-2 text-text-secondary"><span class="mt-0.5">&minus;</span> Self-evident practices (&ldquo;write clean code&rdquo;)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm sm:text-base">
+              There&rsquo;s a ~150&ndash;200 instruction budget before compliance drops off. Every line should earn its place.
+            </p>
+            <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Anthropic best practices</p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 7: A Real CLAUDE.md ==================== -->
       <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="7">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            A Real CLAUDE.md
+          </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-6">From Boris Cherny&rsquo;s team at Anthropic (~2.5k tokens total)</p>
+          <div class="animate-in code-block text-xs sm:text-sm mb-5">
+<span class="comment"># Code style</span>
+- Always use <span class="string">bun</span>, not npm
+- Never use <span class="keyword">enum</span> &mdash; prefer string literal unions
+- Prefer <span class="keyword">type</span> over <span class="keyword">interface</span>
+- Use ES modules (import/export), not CommonJS
+
+<span class="comment"># Workflow</span>
+- Always typecheck after a series of code changes
+- Run single tests, not the whole suite, for performance
+- Prefer running <span class="string">bun run test:unit</span> over the full suite
+
+<span class="comment"># Gotchas</span>
+- The /api routes use edge runtime, not Node
+- The billing library requires a tenant context</div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              &ldquo;Anytime we see Claude do something incorrectly, we add it to CLAUDE.md so Claude knows not to do it next time.&rdquo;
+            </p>
+            <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Boris Cherny</p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 8: Give Claude a Way to Verify ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="8">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            Give Claude a Way to Verify Its Work
+          </h2>
+          <p class="animate-in font-serif text-xl sm:text-2xl md:text-3xl text-accent font-semibold leading-snug mb-8">
+            &ldquo;This is the single highest-leverage thing you can do.&rdquo;
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5 border border-transparent">
+              <h3 class="font-sans text-xs font-bold text-text-secondary uppercase tracking-wide mb-2">Before</h3>
+              <p class="font-sans text-sm text-text-secondary">
+                &ldquo;Implement email validation&rdquo;
+              </p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5 border-2 border-accent">
+              <h3 class="font-sans text-xs font-bold text-accent uppercase tracking-wide mb-2">After</h3>
+              <p class="font-sans text-sm">
+                &ldquo;Write validateEmail. Test cases: user@example.com &rarr; true, &lsquo;invalid&rsquo; &rarr; false. Run tests after implementing.&rdquo;
+              </p>
+            </div>
+          </div>
+          <p class="animate-in font-sans text-sm sm:text-base text-text-secondary">
+            Tests, screenshots, linters, bash commands &mdash; invest in making verification rock-solid. This 2&ndash;3x the quality.
+          </p>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 9: Section Title — Part 2 ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="9">
+        <div class="max-w-4xl mx-auto w-full text-center">
+          <p class="animate-in font-mono text-6xl sm:text-7xl md:text-8xl font-bold text-accent/20 mb-4">02</p>
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+            Extending Claude Code
+          </h2>
+          <div class="animate-in accent-divider mx-auto my-6"></div>
+          <p class="animate-in font-sans text-base sm:text-lg text-text-secondary">
+            Skills, hooks, plugins, and MCP
+          </p>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 10: Skills ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="10">
         <div class="max-w-4xl mx-auto w-full">
           <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             Teaching Claude New Tricks
           </h2>
           <p class="animate-in font-sans text-sm sm:text-base leading-relaxed mb-5">
-            Skills extend Claude's knowledge with project-specific workflows. Here's a real one from the Anthropic docs:
+            Skills extend Claude&rsquo;s knowledge with project-specific workflows. Here&rsquo;s a real one from the Anthropic docs:
           </p>
           <div class="animate-in code-block text-xs sm:text-sm mb-4">
 <span class="comment"># .claude/skills/fix-issue/SKILL.md</span>
@@ -325,8 +393,8 @@ Analyze and fix the GitHub issue: <span class="string">$ARGUMENTS</span>
         </div>
       </section>
 
-      <!-- ==================== SLIDE 8: 9 Types of Skills ==================== -->
-      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="8">
+      <!-- ==================== SLIDE 11: A Taxonomy of Skills ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="11">
         <div class="max-w-4xl mx-auto w-full">
           <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
             A Taxonomy of Skills
@@ -375,7 +443,7 @@ Analyze and fix the GitHub issue: <span class="string">$ARGUMENTS</span>
             <div class="animate-in bg-surface rounded-lg p-3">
               <p class="font-sans text-sm font-semibold mb-0.5">Infrastructure</p>
               <p class="font-mono text-[11px] text-accent mb-1">dependency-management</p>
-              <p class="font-sans text-xs text-text-secondary">Your org's dependency approval workflow</p>
+              <p class="font-sans text-xs text-text-secondary">Your org&rsquo;s dependency approval workflow</p>
             </div>
           </div>
           <div class="animate-in callout">
@@ -393,8 +461,122 @@ Analyze and fix the GitHub issue: <span class="string">$ARGUMENTS</span>
         </div>
       </section>
 
-      <!-- ==================== SLIDE 9: Anatomy of a Repo ==================== -->
-      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="9">
+      <!-- ==================== SLIDE 12: Hooks, Plugins & MCP ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="12">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            Hooks, Plugins &amp; MCP
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5">
+              <h3 class="font-sans text-sm font-bold text-accent uppercase tracking-wide mb-3">Hooks</h3>
+              <p class="font-sans text-sm text-text-secondary mb-3">
+                Shell commands that run automatically at lifecycle events &mdash; before/after edits, on commit, at session end.
+              </p>
+              <div class="code-block !p-2.5 !rounded-lg !text-[11px] !leading-snug">
+{ <span class="string">"matcher"</span>: <span class="string">"Write|Edit"</span>,
+  <span class="string">"hooks"</span>: [{ <span class="string">"command"</span>: <span class="string">"bun run format || true"</span> }] }</div>
+              <p class="font-sans text-[10px] text-text-secondary italic mt-2">&mdash; Boris&rsquo;s auto-format hook</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5">
+              <h3 class="font-sans text-sm font-bold text-accent uppercase tracking-wide mb-3">Plugins</h3>
+              <p class="font-sans text-sm text-text-secondary mb-3">
+                Bundle skills, hooks, commands, and MCP servers into one installable package.
+              </p>
+              <p class="font-sans text-sm text-text-secondary">
+                Great for sharing workflows across your team or with the community.
+              </p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5">
+              <h3 class="font-sans text-sm font-bold text-accent uppercase tracking-wide mb-3">MCP</h3>
+              <p class="font-sans text-sm text-text-secondary mb-3">
+                Connect Claude to external tools &mdash; Slack, Jira, databases, Google Drive.
+              </p>
+              <p class="font-sans text-sm text-text-secondary">
+                Configure via <code class="font-mono text-[11px] bg-dark/10 rounded px-1 py-0.5">.mcp.json</code> in your project root.
+              </p>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              &ldquo;I use a <code class="font-mono text-xs">/commit-push-pr</code> slash command dozens of times every day.&rdquo;
+            </p>
+            <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Boris Cherny, Claude Code creator</p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 13: Power Tips ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="13">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            Power Tips
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-2">Permissions</h3>
+              <p class="font-sans text-sm text-text-secondary mb-3">
+                Pre-allow safe commands via <code class="font-mono text-[11px]">/permissions</code> so Claude doesn&rsquo;t ask every time:
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                <code class="font-mono text-[10px] bg-dark/10 rounded px-1.5 py-0.5">Bash(bun run build:*)</code>
+                <code class="font-mono text-[10px] bg-dark/10 rounded px-1.5 py-0.5">Bash(bun run test:*)</code>
+                <code class="font-mono text-[10px] bg-dark/10 rounded px-1.5 py-0.5">Bash(gh pr diff:*)</code>
+              </div>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-2">Parallel Sessions</h3>
+              <p class="font-sans text-sm text-text-secondary">
+                Run multiple Claude sessions simultaneously, each in its own git worktree. Work on several features at once without conflicts.
+              </p>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-2">Spec-Based Workflow</h3>
+              <p class="font-sans text-sm text-text-secondary">
+                Thariq&rsquo;s approach: write a minimal spec &rarr; let Claude interview you to fill in gaps &rarr; start a fresh session to execute with clean context.
+              </p>
+              <p class="font-sans text-xs text-text-secondary italic mt-2">
+                Claude discovers your requirements through conversation, not guesswork.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 14: Section Title — Part 3 ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="14">
+        <div class="max-w-4xl mx-auto w-full text-center">
+          <p class="animate-in font-mono text-6xl sm:text-7xl md:text-8xl font-bold text-accent/20 mb-4">03</p>
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+            Organizing Your Project
+          </h2>
+          <div class="animate-in accent-divider mx-auto my-6"></div>
+          <p class="animate-in font-sans text-base sm:text-lg text-text-secondary">
+            Structure is leverage
+          </p>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SLIDE 15: What a Good Project Looks Like ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="15">
         <div class="max-w-4xl mx-auto w-full">
           <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
             What a Good Project Looks Like
@@ -426,8 +608,8 @@ my-app/
         </div>
       </section>
 
-      <!-- ==================== SLIDE 10: The .claude/ Directory ==================== -->
-      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="10">
+      <!-- ==================== SLIDE 16: Inside .claude/ ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="16">
         <div class="max-w-4xl mx-auto w-full">
           <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
             Inside .claude/
@@ -439,18 +621,15 @@ my-app/
             </div>
             <div class="animate-in bg-surface rounded-lg shadow-sm p-4">
               <p class="font-mono text-sm text-accent font-semibold mb-2">commands/</p>
-              <p class="font-sans text-sm text-text-secondary">Boris's daily drivers: <code class="font-mono text-xs">/commit-push-pr</code> and <code class="font-mono text-xs">/techdebt</code> (finds duplicated code at session end)</p>
+              <p class="font-sans text-sm text-text-secondary">Boris&rsquo;s daily drivers: <code class="font-mono text-xs">/commit-push-pr</code> and <code class="font-mono text-xs">/techdebt</code> (finds duplicated code at session end)</p>
             </div>
             <div class="animate-in bg-surface rounded-lg shadow-sm p-4">
               <p class="font-mono text-sm text-accent font-semibold mb-2">agents/</p>
-              <p class="font-sans text-sm text-text-secondary">Boris's subagents: <code class="font-mono text-xs">code-simplifier</code>, <code class="font-mono text-xs">verify-app</code>, <code class="font-mono text-xs">build-validator</code></p>
+              <p class="font-sans text-sm text-text-secondary">Custom subagents: <code class="font-mono text-xs">code-simplifier</code>, <code class="font-mono text-xs">verify-app</code>, <code class="font-mono text-xs">build-validator</code></p>
             </div>
             <div class="animate-in bg-surface rounded-lg shadow-sm p-4">
               <p class="font-mono text-sm text-accent font-semibold mb-2">settings.json</p>
-              <p class="font-sans text-xs text-text-secondary mb-2">Boris's PostToolUse hook &mdash; auto-formats after every edit:</p>
-              <div class="code-block !p-2.5 !rounded-lg !text-[11px] !leading-snug">
-{ <span class="string">"matcher"</span>: <span class="string">"Write|Edit"</span>,
-  <span class="string">"hooks"</span>: [{ <span class="string">"command"</span>: <span class="string">"bun run format || true"</span> }] }</div>
+              <p class="font-sans text-sm text-text-secondary">Permissions, hooks, and project-level configuration &mdash; shareable via git</p>
             </div>
           </div>
           <div class="animate-in callout">
@@ -459,9 +638,6 @@ my-app/
             </p>
             <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Boris Cherny, Claude Code creator</p>
           </div>
-          <p class="animate-in font-sans text-xs text-text-secondary mt-3">
-            <span class="font-semibold text-foreground">Plugins</span> bundle skills, hooks, commands, and MCP into one installable package &mdash; great for sharing across teams.
-          </p>
         </div>
         <div class="slide-footer text-text-secondary">
           <div class="flex flex-col items-start">
@@ -471,57 +647,8 @@ my-app/
         </div>
       </section>
 
-      <!-- ==================== SLIDE 11: Power Tips ==================== -->
-      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="11">
-        <div class="max-w-4xl mx-auto w-full">
-          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
-            Level Up
-          </h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="animate-in glass-card rounded-xl p-5">
-              <h3 class="font-sans text-base font-bold mb-2">Hooks</h3>
-              <p class="font-sans text-sm text-text-secondary mb-2">
-                Boris's setup: <code class="font-mono text-[11px]">"Write|Edit"</code> matcher triggers <code class="font-mono text-[11px]">bun run format</code> after every file change.
-              </p>
-              <p class="font-sans text-xs text-text-secondary italic">
-                Also: stop hooks for verification, PostCompact hooks to re-inject critical context.
-              </p>
-            </div>
-            <div class="animate-in glass-card rounded-xl p-5">
-              <h3 class="font-sans text-base font-bold mb-2">Permissions</h3>
-              <p class="font-sans text-sm text-text-secondary mb-2">
-                Pre-allow safe commands via <code class="font-mono text-[11px]">/permissions</code>:
-              </p>
-              <div class="flex flex-wrap gap-1.5">
-                <code class="font-mono text-[10px] bg-dark/10 rounded px-1.5 py-0.5">Bash(bun run build:*)</code>
-                <code class="font-mono text-[10px] bg-dark/10 rounded px-1.5 py-0.5">Bash(bun run test:*)</code>
-                <code class="font-mono text-[10px] bg-dark/10 rounded px-1.5 py-0.5">Bash(gh pr diff:*)</code>
-              </div>
-            </div>
-            <div class="animate-in glass-card rounded-xl p-5">
-              <h3 class="font-sans text-base font-bold mb-2">Parallel Sessions</h3>
-              <p class="font-sans text-sm text-text-secondary">
-                Boris runs 5 local terminal tabs + 5&ndash;10 on the web, each in its own git worktree. &ldquo;Single biggest productivity unlock.&rdquo;
-              </p>
-            </div>
-            <div class="animate-in glass-card rounded-xl p-5">
-              <h3 class="font-sans text-base font-bold mb-2">Spec-Based Workflow</h3>
-              <p class="font-sans text-sm text-text-secondary">
-                Thariq's approach: start with a minimal spec &rarr; ask Claude to interview you &rarr; execute in a fresh session with clean context.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="slide-footer text-text-secondary">
-          <div class="flex flex-col items-start">
-            <img src="[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
-            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== SLIDE 12: Recap ==================== -->
-      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="12">
+      <!-- ==================== SLIDE 17: Three Takeaways ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="17">
         <div class="max-w-4xl mx-auto w-full">
           <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center">
             Three Takeaways
@@ -568,7 +695,7 @@ my-app/
 
     <!-- Slide counter -->
     <div id="slide-counter" class="absolute bottom-6 right-8 font-sans text-sm text-text-secondary z-50">
-      <span id="current-num">1</span> / <span id="total-num">12</span>
+      <span id="current-num">1</span> / <span id="total-num">17</span>
     </div>
   </div>
 
