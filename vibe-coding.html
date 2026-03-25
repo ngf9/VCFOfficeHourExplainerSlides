@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mental Models for Vibe Coding</title>
+
+  <!-- Tailwind v3 Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#F5F0EB',
+            foreground: '#1C1917',
+            accent: '#0D9488',
+            'accent-light': '#14B8A6',
+            surface: '#FFFFFF',
+            'text-secondary': '#78716C',
+            dark: '#1C1917',
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Shared slide CSS -->
+  <link rel="stylesheet" href="shared/slides.css">
+</head>
+<body class="bg-background text-foreground font-sans">
+  <div id="slide-deck" class="relative w-screen h-screen overflow-hidden">
+    <!-- Progress bar -->
+    <div id="progress-bar" class="absolute top-0 left-0 h-1 bg-accent transition-all duration-300 z-50"></div>
+
+    <!-- Home button -->
+    <a href="index.html" class="home-btn" title="Back to home">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </a>
+
+    <!-- Slides container -->
+    <div id="slides" class="relative w-full h-full">
+
+      <!-- ==================== SLIDE 1: Title ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="1">
+        <div class="max-w-4xl mx-auto w-full text-center">
+          <h1 class="animate-in font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-foreground leading-tight">
+            Mental Models for<br>Vibe Coding
+          </h1>
+          <div class="animate-in accent-divider mx-auto my-6"></div>
+          <p class="animate-in font-sans text-lg sm:text-xl text-text-secondary">
+            Structure your thinking before you structure your code
+          </p>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+<!-- ==================== SLIDE 2: Table of Contents ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="2">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            What We&rsquo;ll Cover
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-0">
+            <div>
+              <div class="animate-in flex items-baseline gap-3 py-2 border-b border-gray-100">
+                <span class="font-sans text-sm sm:text-base font-semibold">The 3 Phases to Vibe Coding</span>
+              </div>
+              <p class="animate-in font-sans text-xs font-bold text-accent uppercase tracking-wide mb-1 mt-3">Part 1 &mdash; Before Building</p>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">Documentation-First, Code Second</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">The LLM Is Your Coworker, Not Your Tool</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">Context Is King, Intent Is Queen</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">The Intent.md Framework</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">The Interrogation System</span>
+              </div>
+              <p class="animate-in font-sans text-xs font-bold text-accent uppercase tracking-wide mb-1 mt-3">Part 2 &mdash; While Building</p>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">Self-Improving CLAUDE.md</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">progress.txt: Your Session Bridge</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">Specificity Compounds</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">Investigation Mode vs Explicit Mode</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">The Debugging Loop</span>
+              </div>
+            </div>
+            <div>
+              <p class="animate-in font-sans text-xs font-bold text-accent uppercase tracking-wide mb-1 mt-3">Part 3 &mdash; Before Shipping</p>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">The After Action Report (AAR)</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">Pre-Ship Checklist</span>
+              </div>
+              <p class="animate-in font-sans text-xs font-bold text-accent uppercase tracking-wide mb-1 mt-3">Part 4 &mdash; Other Concepts</p>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">Product Command</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">It&rsquo;s OK for V1 to Be Messy</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">The Agent as Your Only Interface</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">Turn Claude into Claude Teacher</span>
+              </div>
+              <p class="animate-in font-sans text-xs font-bold text-accent uppercase tracking-wide mb-1 mt-3">Part 5 &mdash; Vocabulary &amp; Concepts</p>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">Speak the Language: Code</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">Speak the Language: Architecture</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">Design Vocabulary</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">Screenshot-Driven Development</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">How to Iterate</span>
+              </div>
+              <div class="animate-in flex items-baseline gap-3 py-1 border-b border-gray-100">
+                <span class="font-sans text-sm">When AI Is the Wrong Tool</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+<!-- ==================== SLIDE 3: The 3 Phases to Vibe Coding ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="3">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-center">
+            The 3 Phases to Vibe Coding
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-3">Before Building</h3>
+              <div class="flex flex-col gap-1.5">
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Interrogate your idea</p>
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Write 6 canonical docs</p>
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Write CLAUDE.md with rules</p>
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Create progress.txt</p>
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Gather UI screenshots</p>
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Init git, push to GitHub</p>
+              </div>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-3">While Building</h3>
+              <div class="flex flex-col gap-1.5">
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> AI reads CLAUDE.md + progress.txt first</p>
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Plan mode before coding</p>
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> One feature at a time</p>
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Reference docs in every prompt</p>
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Commit after each working feature</p>
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Update progress.txt + lessons.md</p>
+              </div>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-3">Before Shipping</h3>
+              <div class="flex flex-col gap-1.5">
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Check mobile</p>
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Check error &amp; empty states</p>
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Verify secrets are hidden</p>
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Test main user flow end-to-end</p>
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Check performance</p>
+                <p class="font-sans text-xs text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Ship, then iterate on feedback</p>
+              </div>
+            </div>
+          </div>
+          <div class="animate-in text-center">
+            <p class="font-serif text-base sm:text-lg italic text-text-secondary leading-relaxed mb-2">
+              Vibe coding isn&rsquo;t magic. It&rsquo;s planning, documentation, vocabulary, and iteration.<br>The AI does the typing. You do the thinking.
+            </p>
+            <p class="font-sans text-[10px] text-text-secondary">
+              Source: <a href="https://x.com/kloss_xyz/status/2018097344345223455" class="text-accent underline" target="_blank" rel="noopener">@kloss_xyz</a>
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== Section: Before Building ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="4">
+        <div class="max-w-4xl mx-auto w-full text-center">
+          <p class="animate-in font-mono text-6xl sm:text-7xl md:text-8xl font-bold text-accent/20 mb-4">01</p>
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+            Before Building
+          </h2>
+          <div class="animate-in accent-divider mx-auto my-6"></div>
+          <p class="animate-in font-sans text-base sm:text-lg text-text-secondary">
+            Set up your system before writing a single line of code
+          </p>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+<!-- ==================== SLIDE 4: Documentation-First, Code Second ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="5">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            Documentation-First, Code Second
+          </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-5">
+            Write these 6 canonical docs before touching any code. They cross-reference each other and give AI everything it needs.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+            <div class="animate-in bg-surface rounded-lg p-3">
+              <p class="font-mono text-xs text-accent font-semibold mb-1">PRD.md</p>
+              <p class="font-sans text-xs text-text-secondary">Full spec: what you&rsquo;re building, who it&rsquo;s for, features, scope, success criteria. Your contract with AI.</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3">
+              <p class="font-mono text-xs text-accent font-semibold mb-1">APP_FLOW.md</p>
+              <p class="font-sans text-xs text-text-secondary">Every page, every user path. Step-by-step sequences with decision points, success/error states.</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3">
+              <p class="font-mono text-xs text-accent font-semibold mb-1">TECH_STACK.md</p>
+              <p class="font-sans text-xs text-text-secondary">Every package locked to exact versions. Eliminates hallucinated dependencies and random tech choices.</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3">
+              <p class="font-mono text-xs text-accent font-semibold mb-1">FRONTEND_GUIDELINES.md</p>
+              <p class="font-sans text-xs text-text-secondary">Complete design system: fonts, colors (hex), spacing scale, component styles, responsive breakpoints.</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3">
+              <p class="font-mono text-xs text-accent font-semibold mb-1">BACKEND_STRUCTURE.md</p>
+              <p class="font-sans text-xs text-text-secondary">Database schema, auth logic, API endpoint contracts, storage rules, edge cases.</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-3">
+              <p class="font-mono text-xs text-accent font-semibold mb-1">IMPLEMENTATION_PLAN.md</p>
+              <p class="font-sans text-xs text-text-secondary">Step-by-step build sequence. The more steps, the less AI guesses. The less it guesses, the fewer hallucinations.</p>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              You&rsquo;re not writing docs for humans. You&rsquo;re writing constraints for AI. Markdown is the language AI thinks in.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+<!-- ==================== SLIDE 10: The LLM Is Your Coworker ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="6">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            The LLM Is Your Coworker, Not Your Tool
+          </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-6">When you frame AI as a team member, everything changes. &mdash; <em>Randall Bennett</em></p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5 border border-transparent">
+              <h3 class="font-sans text-xs font-bold text-text-secondary uppercase tracking-wide mb-3">Tool Mindset</h3>
+              <div class="flex flex-col gap-2">
+                <p class="font-sans text-sm text-text-secondary flex items-start gap-2"><span class="mt-0.5">&minus;</span> Press button, get output</p>
+                <p class="font-sans text-sm text-text-secondary flex items-start gap-2"><span class="mt-0.5">&minus;</span> Blame it when output is bad</p>
+                <p class="font-sans text-sm text-text-secondary flex items-start gap-2"><span class="mt-0.5">&minus;</span> No context, no feedback</p>
+                <p class="font-sans text-sm text-text-secondary flex items-start gap-2"><span class="mt-0.5">&minus;</span> Stays at P50 (median)</p>
+              </div>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5 border-2 border-accent">
+              <h3 class="font-sans text-xs font-bold text-accent uppercase tracking-wide mb-3">Coworker Mindset</h3>
+              <div class="flex flex-col gap-2">
+                <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Explain goals like you would to a colleague</p>
+                <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Give feedback like a junior developer</p>
+                <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Build team culture through docs &amp; prompts</p>
+                <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Walk it up to P90 for your domain</p>
+              </div>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              <span class="font-semibold">The P50 &rarr; P90 shift:</span> By default, an LLM operates at the 50th percentile of humanity. Your job is to walk it up to the 90th percentile for your specific domain through context, culture, and intent.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+<!-- ==================== SLIDE 11: Context Is King, Intent Is Queen ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="7">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            Context Is King, Intent Is Queen
+          </h2>
+          <div class="animate-in flex items-end justify-center gap-8 mb-8">
+            <div class="text-center">
+              <div class="bg-accent/10 rounded-xl px-6 py-8 mb-2" style="min-height:120px;display:flex;align-items:center;justify-content:center">
+                <div>
+                  <p class="font-serif text-2xl font-bold text-accent mb-1">Context</p>
+                  <p class="font-sans text-xs text-text-secondary">What the LLM <em>knows</em></p>
+                </div>
+              </div>
+              <p class="font-sans text-[10px] text-text-secondary">Files, docs, CLAUDE.md,<br>conversation history</p>
+            </div>
+            <div class="text-center mb-12">
+              <p class="font-sans text-3xl text-accent font-bold">+</p>
+            </div>
+            <div class="text-center">
+              <div class="bg-accent/10 rounded-xl px-6 py-8 mb-2" style="min-height:120px;display:flex;align-items:center;justify-content:center">
+                <div>
+                  <p class="font-serif text-2xl font-bold text-accent mb-1">Intent</p>
+                  <p class="font-sans text-xs text-text-secondary">What the LLM <em>does</em> with it</p>
+                </div>
+              </div>
+              <p class="font-sans text-[10px] text-text-secondary">Your goals, constraints,<br>trade-offs, priorities</p>
+            </div>
+            <div class="text-center mb-12">
+              <p class="font-sans text-3xl text-accent font-bold">=</p>
+            </div>
+            <div class="text-center">
+              <div class="bg-accent rounded-xl px-6 py-8 mb-2 text-white" style="min-height:120px;display:flex;align-items:center;justify-content:center">
+                <div>
+                  <p class="font-serif text-2xl font-bold mb-1">Great Output</p>
+                  <p class="font-sans text-xs opacity-80">Consistent, correct code</p>
+                </div>
+              </div>
+              <p class="font-sans text-[10px] text-text-secondary">No hallucinations,<br>no guessing</p>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              Most people obsess over prompts. <span class="font-semibold">The bigger lever is context engineering</span> &mdash; making sure the right information is in the context window when the LLM makes decisions.
+            </p>
+            <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Randall Bennett</p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+<!-- ==================== SLIDE 14: The Intent.md Framework ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="8">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            The Intent.md Framework
+          </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-5">
+            Randall&rsquo;s 7-section file for every project. Create at the company, project, or feature level. Even a rough one beats having none.
+          </p>
+          <div class="flex flex-col gap-2">
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="shrink-0 w-7 h-7 rounded-full bg-accent text-white font-sans font-bold text-xs flex items-center justify-center">1</span>
+              <div><p class="font-sans text-sm font-semibold">Purpose</p><p class="font-sans text-xs text-text-secondary">Why are we building this? What&rsquo;s the reason anything is happening?</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="shrink-0 w-7 h-7 rounded-full bg-accent text-white font-sans font-bold text-xs flex items-center justify-center">2</span>
+              <div><p class="font-sans text-sm font-semibold">End State</p><p class="font-sans text-xs text-text-secondary">What does success look like? How will this feel when it&rsquo;s done?</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="shrink-0 w-7 h-7 rounded-full bg-accent text-white font-sans font-bold text-xs flex items-center justify-center">3</span>
+              <div><p class="font-sans text-sm font-semibold">Constraints</p><p class="font-sans text-xs text-text-secondary">What&rsquo;s already decided? Non-negotiable boundaries AI must respect.</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="shrink-0 w-7 h-7 rounded-full bg-accent text-white font-sans font-bold text-xs flex items-center justify-center">4</span>
+              <div><p class="font-sans text-sm font-semibold">Trade-offs</p><p class="font-sans text-xs text-text-secondary">Ranked priorities. &ldquo;Feature parity over abstraction purity.&rdquo; What to sacrifice for what.</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="shrink-0 w-7 h-7 rounded-full bg-accent text-white font-sans font-bold text-xs flex items-center justify-center">5</span>
+              <div><p class="font-sans text-sm font-semibold">Risk Tolerance</p><p class="font-sans text-xs text-text-secondary">Where can AI be bold? Where must it be cautious? Where is breakage acceptable?</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="shrink-0 w-7 h-7 rounded-full bg-accent text-white font-sans font-bold text-xs flex items-center justify-center">6</span>
+              <div><p class="font-sans text-sm font-semibold">Escalation Conditions</p><p class="font-sans text-xs text-text-secondary">When should AI stop and ask you? Define the hard stops.</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="shrink-0 w-7 h-7 rounded-full bg-accent text-white font-sans font-bold text-xs flex items-center justify-center">7</span>
+              <div><p class="font-sans text-sm font-semibold">Verification Steps</p><p class="font-sans text-xs text-text-secondary">How do we know it worked? Specific tests, checks, or manual confirmations.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== The Interrogation System ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="9">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            The Interrogation System
+          </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-4">
+            Before you even write documentation, make AI tear your idea apart. AI hallucinates when your clarity ends &mdash; so extend your clarity.
+          </p>
+          <div class="animate-in code-block text-xs sm:text-sm mb-4">
+<span class="string">"Before writing any code, endlessly interrogate
+my idea in Planning mode only. Assume nothing.
+Ask questions until there are no assumptions left."</span></div>
+          <div class="animate-in bg-surface rounded-lg shadow-sm p-4 mb-4">
+            <h3 class="font-sans text-sm font-bold mb-2">What AI should ask you:</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+              <p class="font-sans text-xs text-text-secondary flex items-start gap-1"><span class="text-accent">&bull;</span> Who is this for?</p>
+              <p class="font-sans text-xs text-text-secondary flex items-start gap-1"><span class="text-accent">&bull;</span> What&rsquo;s the core action?</p>
+              <p class="font-sans text-xs text-text-secondary flex items-start gap-1"><span class="text-accent">&bull;</span> What happens on success?</p>
+              <p class="font-sans text-xs text-text-secondary flex items-start gap-1"><span class="text-accent">&bull;</span> What data gets saved?</p>
+              <p class="font-sans text-xs text-text-secondary flex items-start gap-1"><span class="text-accent">&bull;</span> What happens on error?</p>
+              <p class="font-sans text-xs text-text-secondary flex items-start gap-1"><span class="text-accent">&bull;</span> Does this need auth?</p>
+              <p class="font-sans text-xs text-text-secondary flex items-start gap-1"><span class="text-accent">&bull;</span> Does this need a database?</p>
+              <p class="font-sans text-xs text-text-secondary flex items-start gap-1"><span class="text-accent">&bull;</span> Does it work on mobile?</p>
+              <p class="font-sans text-xs text-text-secondary flex items-start gap-1"><span class="text-accent">&bull;</span> What data gets displayed?</p>
+            </div>
+          </div>
+          <p class="animate-in font-sans text-sm mb-3">Then generate your docs from the answers:</p>
+          <div class="animate-in code-block !text-[11px] !leading-relaxed !p-3 mb-4">
+<span class="string">"Based on our interrogation, generate my canonical
+documentation files: PRD.md, APP_FLOW.md, TECH_STACK.md,
+FRONTEND_GUIDELINES.md, BACKEND_STRUCTURE.md,
+IMPLEMENTATION_PLAN.md. Be specific and exhaustive."</span></div>
+          <div class="animate-in flex items-center justify-center gap-3">
+            <span class="font-sans text-sm font-semibold bg-accent/10 rounded-lg px-3 py-1.5">Interrogation</span>
+            <span class="text-accent">&rarr;</span>
+            <span class="font-sans text-sm font-semibold bg-accent/10 rounded-lg px-3 py-1.5">Documentation</span>
+            <span class="text-accent">&rarr;</span>
+            <span class="font-sans text-sm font-semibold bg-accent/10 rounded-lg px-3 py-1.5">Code</span>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== Section: While Building ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="10">
+        <div class="max-w-4xl mx-auto w-full text-center">
+          <p class="animate-in font-mono text-6xl sm:text-7xl md:text-8xl font-bold text-accent/20 mb-4">02</p>
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+            While Building
+          </h2>
+          <div class="animate-in accent-divider mx-auto my-6"></div>
+          <p class="animate-in font-sans text-base sm:text-lg text-text-secondary">
+            Execute with discipline and iterate
+          </p>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+<!-- ==================== SLIDE 6: Self-Improving CLAUDE.md ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="11">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            Self-Improving CLAUDE.md
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-5">
+            <div>
+              <div class="animate-in flex items-start gap-3 mb-3">
+                <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
+                <p class="font-sans text-sm leading-relaxed">
+                  CLAUDE.md is a <span class="font-semibold">living document</span>, not a static file. It gets better every session.
+                </p>
+              </div>
+              <div class="animate-in flex items-start gap-3 mb-3">
+                <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
+                <p class="font-sans text-sm leading-relaxed">
+                  After every correction, end with: <span class="font-semibold">&ldquo;Edit CLAUDE.md so you don&rsquo;t make that mistake again.&rdquo;</span>
+                </p>
+              </div>
+              <div class="animate-in flex items-start gap-3 mb-3">
+                <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
+                <p class="font-sans text-sm leading-relaxed">
+                  Create a <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">lessons.md</code> file. After every debugging session, Claude updates it with the pattern that caused the issue + the rule that prevents it.
+                </p>
+              </div>
+              <div class="animate-in flex items-start gap-3">
+                <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
+                <p class="font-sans text-sm leading-relaxed">
+                  Point CLAUDE.md at it: <span class="font-semibold">&ldquo;Review lessons.md at session start.&rdquo;</span>
+                </p>
+              </div>
+            </div>
+            <div class="animate-in code-block !text-xs !leading-relaxed !p-4">
+<span class="comment"># CLAUDE.md (self-improving)</span>
+
+<span class="comment">## Rules</span>
+- Use bun, not npm
+- Never use inline styles
+- Mobile-first responsive
+
+<span class="comment">## References</span>
+Read <span class="string">@docs/prd.md</span> for requirements
+Read <span class="string">@docs/lessons.md</span> at session start
+Read <span class="string">@progress.txt</span> for current state
+
+<span class="comment">## Learned corrections</span>
+- Always check edge runtime for /api
+- Use tenant ctx for billing lib
+- Run typecheck before committing</div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              Claude is eerily good at writing rules for itself. Over time, your mistake rate drops because AI is encoding its own corrections.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+<!-- ==================== SLIDE 7: progress.txt ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="12">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            progress.txt: Your Session Bridge
+          </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-5">
+            AI has no memory between sessions. When you close a terminal, everything is gone. progress.txt is your external memory.
+          </p>
+          <div class="animate-in code-block text-xs sm:text-sm mb-5">
+<span class="comment"># progress.txt</span>
+
+<span class="keyword">COMPLETED:</span>
+<span class="string">- User auth via Clerk (login, signup, Google OAuth)</span>
+<span class="string">- Dashboard layout with sidebar navigation</span>
+<span class="string">- Products API endpoint (GET /api/products)</span>
+
+<span class="keyword">IN PROGRESS:</span>
+<span class="string">- Product detail page (/products/[id])</span>
+<span class="string">- Need to connect frontend to API</span>
+
+<span class="keyword">NEXT:</span>
+<span class="string">- Shopping cart functionality</span>
+<span class="string">- Checkout with Stripe</span>
+
+<span class="keyword">KNOWN BUGS:</span>
+<span class="string">- Mobile nav doesn't close after clicking a link</span></div>
+          <div class="animate-in flex flex-col gap-2">
+            <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent">&bull;</span> Update <span class="font-semibold">after every completed feature</span></p>
+            <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent">&bull;</span> AI reads this <span class="font-semibold">at the start of every session</span></p>
+            <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent">&bull;</span> Commit to git alongside your code &mdash; both GitHub and your context stay in sync</p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+<!-- ==================== SLIDE 8: Specificity Compounds ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="13">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            Specificity Compounds
+          </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-6">
+            The more you define upfront, the less you debug later. Same idea, completely different output quality.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5 border border-transparent">
+              <h3 class="font-sans text-xs font-bold text-text-secondary uppercase tracking-wide mb-3">Vague prompt</h3>
+              <div class="code-block !p-3 !rounded-lg !text-xs !leading-relaxed">
+<span class="string">"Build me an app where
+users can post things"</span></div>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5 border-2 border-accent">
+              <h3 class="font-sans text-xs font-bold text-accent uppercase tracking-wide mb-3">Specific prompt backed by docs</h3>
+              <div class="code-block !p-3 !rounded-lg !text-xs !leading-relaxed">
+<span class="string">"Read CLAUDE.md and progress.txt first.
+Then build step 4.2 from
+IMPLEMENTATION_PLAN.md. The login
+flow is in APP_FLOW.md section 3.
+Style per FRONTEND_GUIDELINES.md.
+Match the UI to the screenshot."</span></div>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              The specificity isn&rsquo;t extra work &mdash; it <span class="font-semibold">is</span> the work. Precision compounds. Vagueness compounds too, just in the wrong direction.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+<!-- ==================== SLIDE 13: Investigation vs Explicit Mode ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="14">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            Investigation Mode vs Explicit Mode
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5">
+              <h3 class="font-sans text-lg font-bold mb-1">Investigation</h3>
+              <p class="font-mono text-xs text-text-secondary mb-3">(YOLO mode)</p>
+              <div class="flex flex-col gap-2">
+                <p class="font-sans text-sm text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Back and forth with AI, exploring</p>
+                <p class="font-sans text-sm text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> You&rsquo;ll throw most of this away</p>
+                <p class="font-sans text-sm text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Figuring out <em>what</em> to build</p>
+                <p class="font-sans text-sm text-text-secondary flex items-start gap-2"><span class="text-accent">&bull;</span> Learning, brainstorming, prototyping</p>
+              </div>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5 border-2 border-accent">
+              <h3 class="font-sans text-lg font-bold mb-1">Explicit</h3>
+              <p class="font-mono text-xs text-accent mb-3">(Intentful mode)</p>
+              <div class="flex flex-col gap-2">
+                <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent">&bull;</span> Set AI loose, it builds exactly what you expect</p>
+                <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent">&bull;</span> One-shot or three-shot execution</p>
+                <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent">&bull;</span> You know <em>what</em> you want</p>
+                <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent">&bull;</span> Your process is solid and repeatable</p>
+              </div>
+            </div>
+          </div>
+          <div class="animate-in flex items-center justify-center gap-3">
+            <span class="font-sans text-sm bg-surface rounded-lg px-3 py-1.5 shadow-sm">Start here: Investigation</span>
+            <span class="text-accent text-lg">&rarr;</span>
+            <span class="font-sans text-sm font-semibold bg-accent text-white rounded-lg px-3 py-1.5">Graduate to: Explicit</span>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== The Debugging Loop ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="15">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            The Debugging Loop
+          </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-5">
+            Errors are instructions, not insults. Vibe coding is iteration &mdash; the skill is iterating quickly.
+          </p>
+          <div class="flex flex-col gap-3 mb-5">
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="shrink-0 w-7 h-7 rounded-full bg-accent text-white font-sans font-bold text-xs flex items-center justify-center">1</span>
+              <div><p class="font-sans text-sm font-semibold">Read the error</p><p class="font-sans text-xs text-text-secondary">Actually read it. Don&rsquo;t panic.</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="shrink-0 w-7 h-7 rounded-full bg-accent text-white font-sans font-bold text-xs flex items-center justify-center">2</span>
+              <div><p class="font-sans text-sm font-semibold">Find the location</p><p class="font-sans text-xs text-text-secondary">What file, what line number?</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="shrink-0 w-7 h-7 rounded-full bg-accent text-white font-sans font-bold text-xs flex items-center justify-center">3</span>
+              <div><p class="font-sans text-sm font-semibold">Understand the claim</p><p class="font-sans text-xs text-text-secondary">What does the error say is wrong?</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="shrink-0 w-7 h-7 rounded-full bg-accent text-white font-sans font-bold text-xs flex items-center justify-center">4</span>
+              <div><p class="font-sans text-sm font-semibold">Check the obvious</p><p class="font-sans text-xs text-text-secondary">Typos, missing imports, wrong variable names</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="shrink-0 w-7 h-7 rounded-full bg-accent text-white font-sans font-bold text-xs flex items-center justify-center">5</span>
+              <div><p class="font-sans text-sm font-semibold">Give AI full context</p><p class="font-sans text-xs text-text-secondary">Error message + code at that line + what you expected to happen</p></div>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              The loop: AI gives you code &rarr; you try it &rarr; it breaks &rarr; you paste the error &rarr; AI fixes &rarr; repeat. For stubborn bugs, switch to <code class="font-mono text-xs">Debug mode</code> or use subagents.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== Section: Before Shipping ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="16">
+        <div class="max-w-4xl mx-auto w-full text-center">
+          <p class="animate-in font-mono text-6xl sm:text-7xl md:text-8xl font-bold text-accent/20 mb-4">03</p>
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+            Before Shipping
+          </h2>
+          <div class="animate-in accent-divider mx-auto my-6"></div>
+          <p class="animate-in font-sans text-base sm:text-lg text-text-secondary">
+            Verify and document what you built
+          </p>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+<!-- ==================== SLIDE 15: The After Action Report ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="17">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            The After Action Report (AAR)
+          </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-5">After every task, have AI write a report. Review AARs instead of reading every line of code. &mdash; <em>Randall Bennett</em></p>
+          <div class="animate-in code-block text-xs sm:text-sm mb-5">
+<span class="comment"># AAR: Add Stripe checkout</span>
+
+<span class="keyword">## What happened</span>
+<span class="string">Implemented checkout flow with Stripe Elements.
+Added /api/checkout endpoint and webhook handler.</span>
+
+<span class="keyword">## Changes made</span>
+<span class="string">- src/app/checkout/page.tsx (new)
+- src/app/api/checkout/route.ts (new)
+- src/app/api/webhooks/stripe/route.ts (new)
+- src/lib/stripe.ts (new)</span>
+
+<span class="keyword">## Decisions</span>
+<span class="string">Used Stripe Elements instead of Checkout Sessions
+for more UI control per FRONTEND_GUIDELINES.md.</span>
+
+<span class="keyword">## Why</span>
+<span class="string">Checkout Sessions would redirect users off-site,
+conflicting with the single-page flow in APP_FLOW.md.</span></div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              &ldquo;The AAR gives me everything I need. It tells me what files changed, why decisions were made, so I can feel comfortable this engineer is doing things correctly.&rdquo;
+            </p>
+            <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Randall Bennett</p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== Pre-Ship Checklist ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="18">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            Pre-Ship Checklist
+          </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-6">
+            Don&rsquo;t ship until you&rsquo;ve answered every one of these. Your users will find every bug you missed.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="font-sans text-lg mt-0.5">&#9744;</span>
+              <div><p class="font-sans text-sm font-semibold">Mobile</p><p class="font-sans text-xs text-text-secondary">Actually open it on your phone. Not just browser devtools.</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="font-sans text-lg mt-0.5">&#9744;</span>
+              <div><p class="font-sans text-sm font-semibold">Empty states</p><p class="font-sans text-xs text-text-secondary">What happens with no data? Is there a helpful message?</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="font-sans text-lg mt-0.5">&#9744;</span>
+              <div><p class="font-sans text-sm font-semibold">Error states</p><p class="font-sans text-xs text-text-secondary">What happens with wrong data? Does it fail gracefully?</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="font-sans text-lg mt-0.5">&#9744;</span>
+              <div><p class="font-sans text-sm font-semibold">Loading states</p><p class="font-sans text-xs text-text-secondary">What happens with slow internet? Is there feedback?</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="font-sans text-lg mt-0.5">&#9744;</span>
+              <div><p class="font-sans text-sm font-semibold">Secrets hidden</p><p class="font-sans text-xs text-text-secondary">API keys not in frontend code or browser devtools?</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="font-sans text-lg mt-0.5">&#9744;</span>
+              <div><p class="font-sans text-sm font-semibold">Main flow works</p><p class="font-sans text-xs text-text-secondary">Can a user complete the core action end-to-end?</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="font-sans text-lg mt-0.5">&#9744;</span>
+              <div><p class="font-sans text-sm font-semibold">Stress test</p><p class="font-sans text-xs text-text-secondary">Can you break it by clicking fast or submitting twice?</p></div>
+            </div>
+            <div class="animate-in flex items-start gap-3 bg-surface rounded-lg p-3">
+              <span class="font-sans text-lg mt-0.5">&#9744;</span>
+              <div><p class="font-sans text-sm font-semibold">Cross-browser</p><p class="font-sans text-xs text-text-secondary">Does it work in Chrome, Safari, and Firefox?</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== Section: Other Concepts ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="19">
+        <div class="max-w-4xl mx-auto w-full text-center">
+          <p class="animate-in font-mono text-6xl sm:text-7xl md:text-8xl font-bold text-accent/20 mb-4">04</p>
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+            Other Concepts
+          </h2>
+          <div class="animate-in accent-divider mx-auto my-6"></div>
+          <p class="animate-in font-sans text-base sm:text-lg text-text-secondary">
+            Mental models that make everything click
+          </p>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+<!-- ==================== SLIDE 12: Product Command ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="20">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            Product Command
+          </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-6">From military &ldquo;Mission Command&rdquo; &mdash; top-down on intent, bottoms-up on execution. &mdash; <em>Randall Bennett</em></p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-2">Shared Picture</h3>
+              <p class="font-sans text-sm text-text-secondary">The LLM understands what you&rsquo;re building and why. Your docs, intent, and CLAUDE.md paint the full picture.</p>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-2">Decentralized Execution</h3>
+              <p class="font-sans text-sm text-text-secondary">AI can make reasonable decisions without you babysitting every step. It has enough context to act independently.</p>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-2">Disciplined Initiative</h3>
+              <p class="font-sans text-sm text-text-secondary">If AI makes a choice you didn&rsquo;t expect, your intent wasn&rsquo;t clear enough. Fix the docs, not the code.</p>
+            </div>
+          </div>
+          <div class="animate-in grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="bg-surface rounded-lg p-4 text-center">
+              <p class="font-sans text-sm font-bold mb-1">Peacetime</p>
+              <p class="font-sans text-xs text-text-secondary">Building systems, processes, docs, infrastructure. This is your prep work.</p>
+            </div>
+            <div class="bg-surface rounded-lg p-4 text-center border-2 border-accent">
+              <p class="font-sans text-sm font-bold mb-1">Wartime</p>
+              <p class="font-sans text-xs text-text-secondary">Executing and shipping. You can only do this well if your peacetime prep is solid.</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+<!-- ==================== SLIDE 16: It's OK for V1 to Be Messy ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="21">
+        <div class="max-w-4xl mx-auto w-full text-center">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
+            It&rsquo;s OK for V1 to Be Messy
+          </h2>
+          <p class="animate-in font-serif text-xl sm:text-2xl md:text-3xl text-accent font-semibold leading-snug mb-8">
+            Build less. Ship more.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+            <div class="animate-in bg-surface rounded-lg p-4 text-center">
+              <p class="font-sans text-lg font-bold mb-1">Google</p>
+              <p class="font-sans text-xs text-text-secondary">Sergey Brin was learning Java while building V1</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-4 text-center">
+              <p class="font-sans text-lg font-bold mb-1">Twitter</p>
+              <p class="font-sans text-xs text-text-secondary">Terrible first codebase that shipped and scaled later</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-4 text-center">
+              <p class="font-sans text-lg font-bold mb-1">Facebook</p>
+              <p class="font-sans text-xs text-text-secondary">Messy PHP that served billions before rewrites</p>
+            </div>
+          </div>
+          <div class="animate-in flex flex-col gap-2 text-left max-w-lg mx-auto">
+            <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent">&bull;</span> Don&rsquo;t over-engineer for 100K users when you have 10</p>
+            <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent">&bull;</span> Don&rsquo;t cover every corner case &mdash; fix the most important ones</p>
+            <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent">&bull;</span> The best app you never ship is worse than the average app that&rsquo;s live</p>
+            <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent">&bull;</span> Ship, get feedback, iterate based on real usage</p>
+          </div>
+          <p class="animate-in font-sans text-xs text-text-secondary italic mt-4">&mdash; Stepan Parunashvili</p>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+<!-- ==================== SLIDE 17: The Agent as Your Only Interface ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="22">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            The Agent as Your Only Interface
+          </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-6">Everything is code. Everything is an API. The agent should be your single interface to all tools. &mdash; <em>Sid Bharath</em></p>
+          <div class="animate-in flex items-center justify-center gap-3 mb-6 flex-wrap">
+            <div class="bg-accent rounded-xl px-5 py-4 text-white text-center">
+              <p class="font-sans text-base font-bold">You</p>
+              <p class="font-sans text-[10px] opacity-80">Strategist</p>
+            </div>
+            <span class="text-accent text-2xl">&rarr;</span>
+            <div class="bg-accent rounded-xl px-5 py-4 text-white text-center">
+              <p class="font-sans text-base font-bold">Claude Code</p>
+              <p class="font-sans text-[10px] opacity-80">Executor</p>
+            </div>
+            <span class="text-accent text-2xl">&rarr;</span>
+            <div class="flex flex-wrap gap-2 justify-center">
+              <span class="bg-surface rounded-lg px-3 py-2 font-sans text-xs font-semibold shadow-sm">Gmail</span>
+              <span class="bg-surface rounded-lg px-3 py-2 font-sans text-xs font-semibold shadow-sm">Calendar</span>
+              <span class="bg-surface rounded-lg px-3 py-2 font-sans text-xs font-semibold shadow-sm">Slack</span>
+              <span class="bg-surface rounded-lg px-3 py-2 font-sans text-xs font-semibold shadow-sm">Database</span>
+              <span class="bg-surface rounded-lg px-3 py-2 font-sans text-xs font-semibold shadow-sm">GitHub</span>
+              <span class="bg-surface rounded-lg px-3 py-2 font-sans text-xs font-semibold shadow-sm">Analytics</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div class="animate-in bg-surface rounded-lg p-4">
+              <p class="font-sans text-sm font-semibold mb-1">Daily example: <code class="font-mono text-xs text-accent">/plan-day</code></p>
+              <p class="font-sans text-xs text-text-secondary">Checks calendar, reads emails, reviews yesterday&rsquo;s incomplete tasks, proposes today&rsquo;s priorities &mdash; all in one command.</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-4">
+              <p class="font-sans text-sm font-semibold mb-1">Work example: &ldquo;Prep my meeting&rdquo;</p>
+              <p class="font-sans text-xs text-text-secondary">Searches emails, finds deal status, identifies sticking points, suggests talking points &mdash; no app switching.</p>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              &ldquo;If you&rsquo;re not involved in the process of creating, then what is your purpose?&rdquo; You are the strategist. The agent is the executor. Stay involved.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== Turn Claude into Claude Teacher ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="23">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            Turn Claude Code into Claude Teacher
+          </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-5">
+            Every project is a lesson to become more technical. Add this to your CLAUDE.md and Claude will write you a personalized learning doc after every project.
+          </p>
+          <div class="animate-in code-block text-xs sm:text-sm mb-5" style="white-space:pre-wrap">
+<span class="comment"># Add this to your CLAUDE.md</span>
+
+For every project, write a detailed
+<span class="string">FOR_[yourname].md</span> file that explains the
+whole project in plain language.
+
+Explain:
+<span class="keyword">-</span> The technical architecture
+<span class="keyword">-</span> The structure of the codebase and how
+  the various parts are connected
+<span class="keyword">-</span> The technologies used and why we chose them
+<span class="keyword">-</span> Lessons I can learn from it:
+  <span class="comment">  bugs we hit and how we fixed them,</span>
+  <span class="comment">  pitfalls and how to avoid them,</span>
+  <span class="comment">  new technologies used,</span>
+  <span class="comment">  how good engineers think and work,</span>
+  <span class="comment">  best practices</span>
+
+Make it engaging to read. Use analogies and
+anecdotes. Don&rsquo;t make it sound like boring
+technical documentation.</div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              The people who learn while they build are the ones who eventually stop needing guides. This turns every project into a curriculum &mdash; personalized to exactly what <em>you</em> just built.
+            </p>
+            <p class="font-sans text-xs text-text-secondary italic mt-1">&mdash; Zara Zhang (<a href="https://x.com/zarazhangrui" class="text-accent underline" target="_blank" rel="noopener">@zarazhangrui</a>)</p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== Section: Vocabulary & Concepts ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="24">
+        <div class="max-w-4xl mx-auto w-full text-center">
+          <p class="animate-in font-mono text-6xl sm:text-7xl md:text-8xl font-bold text-accent/20 mb-4">05</p>
+          <h2 class="animate-in font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+            Vocabulary &amp; Concepts
+          </h2>
+          <div class="animate-in accent-divider mx-auto my-6"></div>
+          <p class="animate-in font-sans text-base sm:text-lg text-text-secondary">
+            The words and ideas that make your prompts precise
+          </p>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== Speak the Language: Code ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="25">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            Speak the Language &mdash; Code
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-1">Components = LEGOs</h3>
+              <p class="font-sans text-sm text-text-secondary mb-2">Reusable pieces of interface you snap together.</p>
+              <p class="font-sans text-xs text-text-secondary">A button is a component. A navbar is a component. A card is a component. A form is components inside components.</p>
+              <div class="mt-2 p-2 bg-dark/5 rounded">
+                <p class="font-mono text-[10px] text-text-secondary">&ldquo;Build a landing page with: navbar, hero, features grid (3 cards), CTA, footer.&rdquo;</p>
+              </div>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-1">State = Data That Changes</h3>
+              <p class="font-sans text-sm text-text-secondary mb-2">Why your app feels alive &mdash; or doesn&rsquo;t.</p>
+              <p class="font-sans text-xs text-text-secondary">Is the menu open or closed? Is the user logged in? What&rsquo;s in the cart? When your button doesn&rsquo;t work, it&rsquo;s usually a state problem.</p>
+              <div class="mt-2 p-2 bg-dark/5 rounded">
+                <p class="font-mono text-[10px] text-text-secondary">&ldquo;When user clicks this button, set modal state to open.&rdquo;</p>
+              </div>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-1">Layout = Boxes Inside Boxes</h3>
+              <p class="font-sans text-sm text-text-secondary mb-2">Master this and you understand 90% of web design.</p>
+              <p class="font-sans text-xs text-text-secondary">Header at top, main content in middle, optional sidebar, footer at bottom. Sections, containers, grids, cards.</p>
+              <div class="mt-2 p-2 bg-dark/5 rounded">
+                <p class="font-mono text-[10px] text-text-secondary">&ldquo;Two-column layout. Sidebar 250px, fixed. Main content takes the rest.&rdquo;</p>
+              </div>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-1">Pages &amp; Routes</h3>
+              <p class="font-sans text-sm text-text-secondary mb-2">Page = what you see. Route = the URL that shows it.</p>
+              <p class="font-sans text-xs text-text-secondary">Static: <code class="font-mono text-[10px]">/about</code> always shows the same page. Dynamic: <code class="font-mono text-[10px]">/products/[id]</code> shows different products.</p>
+              <div class="mt-2 p-2 bg-dark/5 rounded">
+                <p class="font-mono text-[10px] text-text-secondary">&ldquo;4 pages: home (/), about, products, single product (/products/[id])&rdquo;</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== Speak the Language: Architecture ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="26">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            Speak the Language &mdash; Architecture
+          </h2>
+          <div class="animate-in flex items-center justify-center gap-2 sm:gap-4 mb-6 flex-wrap">
+            <div class="bg-accent/10 rounded-xl px-4 py-3 text-center">
+              <p class="font-sans text-sm font-bold">Frontend</p>
+              <p class="font-sans text-[10px] text-text-secondary">What users see<br>(runs in browser)</p>
+            </div>
+            <span class="text-accent text-xl">&harr;</span>
+            <div class="bg-accent rounded-xl px-4 py-3 text-center text-white">
+              <p class="font-sans text-sm font-bold">API</p>
+              <p class="font-sans text-[10px] opacity-80">The waiter<br>GET / POST / PUT / DELETE</p>
+            </div>
+            <span class="text-accent text-xl">&harr;</span>
+            <div class="bg-accent/10 rounded-xl px-4 py-3 text-center">
+              <p class="font-sans text-sm font-bold">Backend</p>
+              <p class="font-sans text-[10px] text-text-secondary">Behind the scenes<br>(runs on server)</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-4">
+              <h3 class="font-sans text-sm font-bold text-accent mb-2">Database</h3>
+              <p class="font-sans text-xs text-text-secondary mb-2">Where you save stuff permanently. Without one, everything resets on refresh.</p>
+              <p class="font-sans text-xs text-text-secondary"><span class="font-semibold text-foreground">Need one?</span> Users create accounts, save content, or data grows over time. <span class="font-semibold text-foreground">Don&rsquo;t?</span> Static site, portfolio, no user interaction.</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-4">
+              <h3 class="font-sans text-sm font-bold text-accent mb-2">Authentication</h3>
+              <p class="font-sans text-xs text-text-secondary mb-2">Login/logout &mdash; proving who someone is. Harder than it looks.</p>
+              <p class="font-sans text-xs text-text-secondary"><span class="font-semibold text-foreground">Don&rsquo;t build from scratch.</span> Use Clerk (simplest) or Supabase Auth (if already using Supabase for DB).</p>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              Tell AI which you need upfront. &ldquo;Frontend only, just a landing page&rdquo; vs &ldquo;Needs a backend with user accounts and a database&rdquo; produce completely different outputs.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== Design Vocabulary ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="27">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            Design Vocabulary
+          </h2>
+          <p class="animate-in font-sans text-sm text-text-secondary mb-4">
+            <span class="font-semibold text-foreground">UI</span> = what it looks like (colors, fonts, spacing). <span class="font-semibold text-foreground">UX</span> = how it feels to use (intuitive? frustrating?). Be specific with AI about which you mean.
+          </p>
+          <p class="animate-in font-sans text-xs font-bold text-accent uppercase tracking-wide mb-2">Design styles to reference in prompts</p>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
+            <div class="animate-in bg-surface rounded-lg p-2.5">
+              <p class="font-sans text-xs font-semibold mb-0.5">Glassmorphism</p>
+              <p class="font-sans text-[10px] text-text-secondary">Frosted glass, blur, translucent. Apple/Spotify vibes.</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-2.5">
+              <p class="font-sans text-xs font-semibold mb-0.5">Neobrutalism</p>
+              <p class="font-sans text-[10px] text-text-secondary">Bold, thick borders, clashing colors. Gumroad energy.</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-2.5">
+              <p class="font-sans text-xs font-semibold mb-0.5">Bento Grid</p>
+              <p class="font-sans text-[10px] text-text-secondary">Modular blocks, varying sizes. Apple popularized this.</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-2.5">
+              <p class="font-sans text-xs font-semibold mb-0.5">Dark Mode</p>
+              <p class="font-sans text-[10px] text-text-secondary">Not a toggle &mdash; a design system. Plan both palettes from the start.</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-2.5">
+              <p class="font-sans text-xs font-semibold mb-0.5">Micro-interactions</p>
+              <p class="font-sans text-[10px] text-text-secondary">Button scales on hover, checkbox bounces. Separates polished from amateur.</p>
+            </div>
+            <div class="animate-in bg-surface rounded-lg p-2.5">
+              <p class="font-sans text-xs font-semibold mb-0.5">Neumorphism</p>
+              <p class="font-sans text-[10px] text-text-secondary">Soft, extruded 3D feel. Elegant but tricky for accessibility.</p>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              Don&rsquo;t say &ldquo;make it look modern.&rdquo; Say <span class="font-semibold">&ldquo;glassmorphism cards with bento grid layout, dark mode, and micro-interactions on hover states.&rdquo;</span> Lock design decisions in FRONTEND_GUIDELINES.md.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== Screenshot-Driven Development ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="28">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            Screenshot-Driven Development
+          </h2>
+          <p class="animate-in font-sans text-sm sm:text-base text-text-secondary mb-6">
+            Visual references eliminate ambiguity faster than any written description. AI can analyze images and extract design patterns, spacing, colors, and component structures.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-2">Reference a Design</h3>
+              <p class="font-sans text-sm text-text-secondary">Find an app you love on Dribbble or Framer, screenshot it, paste it into Claude Code.</p>
+              <div class="mt-2 p-2 bg-dark/5 rounded">
+                <p class="font-mono text-[10px] text-text-secondary">&ldquo;Match this layout and use this UI as inspiration.&rdquo;</p>
+              </div>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-2">Fix Your WIP</h3>
+              <p class="font-sans text-sm text-text-secondary">Screenshot your own work in progress and show what&rsquo;s wrong.</p>
+              <div class="mt-2 p-2 bg-dark/5 rounded">
+                <p class="font-mono text-[10px] text-text-secondary">&ldquo;Here&rsquo;s what it looks like now. Here&rsquo;s what&rsquo;s wrong. Fix it.&rdquo;</p>
+              </div>
+            </div>
+            <div class="animate-in glass-card rounded-xl p-5">
+              <h3 class="font-sans text-base font-bold mb-2">Compare Output</h3>
+              <p class="font-sans text-sm text-text-secondary">Paste the design and your implementation side by side.</p>
+              <div class="mt-2 p-2 bg-dark/5 rounded">
+                <p class="font-mono text-[10px] text-text-secondary">&ldquo;Compare my implementation to this screenshot. What&rsquo;s different?&rdquo;</p>
+              </div>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              On Mac: <code class="font-mono text-xs bg-dark/10 rounded px-1.5 py-0.5">Ctrl+V</code> to paste screenshots directly into Claude Code. Infinitely better than describing a design with words.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== How to Iterate ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="29">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            How to Iterate
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5 border border-transparent">
+              <h3 class="font-sans text-xs font-bold text-text-secondary uppercase tracking-wide mb-3">Bad iteration</h3>
+              <div class="code-block !p-3 !rounded-lg !text-xs !leading-relaxed">
+<span class="string">"It doesn't look right, fix it."</span>
+
+<span class="string">"It's broken."</span>
+
+<span class="string">"Make it better."</span></div>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5 border-2 border-accent">
+              <h3 class="font-sans text-xs font-bold text-accent uppercase tracking-wide mb-3">Good iteration</h3>
+              <div class="code-block !p-3 !rounded-lg !text-xs !leading-relaxed">
+<span class="string">"The product grid shows 4 columns
+on desktop but I need 3. Card
+images are stretched — use
+object-cover. No loading state
+when data is fetching."</span></div>
+            </div>
+          </div>
+          <div class="animate-in flex items-start gap-3 mb-3">
+            <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
+            <p class="font-sans text-sm leading-relaxed">
+              <span class="font-semibold">Break big ideas into small pieces.</span> Think LEGOs. Each piece is one task, tested independently. &ldquo;Build step 5 from IMPLEMENTATION_PLAN.md&rdquo; not &ldquo;build the next thing.&rdquo;
+            </p>
+          </div>
+          <div class="animate-in flex items-start gap-3">
+            <span class="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0"></span>
+            <p class="font-sans text-sm leading-relaxed">
+              <span class="font-semibold">The loop:</span> AI builds v1 &rarr; you test &rarr; describe what&rsquo;s wrong specifically &rarr; AI fixes &rarr; test again &rarr; repeat. First output is rarely right. That&rsquo;s fine.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== When AI Is the Wrong Tool ==================== -->
+      <section class="slide absolute inset-0 flex items-center justify-center p-8 md:p-16" data-slide="30">
+        <div class="max-w-4xl mx-auto w-full">
+          <h2 class="animate-in font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+            When AI Is the Wrong Tool
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-5">
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5">
+              <h3 class="font-sans text-sm font-bold text-accent uppercase tracking-wide mb-3">Use AI for</h3>
+              <div class="flex flex-col gap-2">
+                <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Generating boilerplate code</p>
+                <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Writing repetitive logic</p>
+                <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Exploring approaches quickly</p>
+                <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Debugging with context</p>
+                <p class="font-sans text-sm flex items-start gap-2"><span class="text-accent mt-0.5">+</span> Translating your intent into code</p>
+              </div>
+            </div>
+            <div class="animate-in bg-surface rounded-lg shadow-sm p-5">
+              <h3 class="font-sans text-sm font-bold text-text-secondary uppercase tracking-wide mb-3">Learn yourself</h3>
+              <div class="flex flex-col gap-2">
+                <p class="font-sans text-sm text-text-secondary flex items-start gap-2"><span class="mt-0.5">&bull;</span> Core concepts (everything in this deck)</p>
+                <p class="font-sans text-sm text-text-secondary flex items-start gap-2"><span class="mt-0.5">&bull;</span> How to read code AI generates</p>
+                <p class="font-sans text-sm text-text-secondary flex items-start gap-2"><span class="mt-0.5">&bull;</span> How to spot when AI is wrong</p>
+                <p class="font-sans text-sm text-text-secondary flex items-start gap-2"><span class="mt-0.5">&bull;</span> How to debug when AI can&rsquo;t help</p>
+                <p class="font-sans text-sm text-text-secondary flex items-start gap-2"><span class="mt-0.5">&bull;</span> How your chosen stack works</p>
+              </div>
+            </div>
+          </div>
+          <div class="animate-in callout">
+            <p class="font-sans text-sm">
+              If you rely on AI for everything, you&rsquo;re building on quicksand. One weird bug and you&rsquo;re stuck. Official docs are often better than AI &mdash; knowing how to search them is the fallback skill nobody talks about.
+            </p>
+          </div>
+        </div>
+        <div class="slide-footer text-text-secondary">
+          <div class="flex flex-col items-start">
+            <img src="images/[ai study camp]@2x (black font).png" alt="AI Study Camp" class="h-3.5">
+            <span class="font-sans text-[8px] italic text-text-secondary mt-0.5">Created by Nicole Garcia Fischer</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Click navigation zones -->
+    <div id="nav-prev" class="absolute left-0 top-0 w-1/5 h-full cursor-pointer z-40"></div>
+    <div id="nav-next" class="absolute right-0 top-0 w-1/5 h-full cursor-pointer z-40"></div>
+
+    <!-- Slide counter -->
+    <div id="slide-counter" class="absolute bottom-6 right-8 font-sans text-sm text-text-secondary z-50">
+      <span id="current-num">1</span> / <span id="total-num">30</span>
+    </div>
+  </div>
+
+  <script src="shared/slides.js"></script>
+</body>
+</html>
